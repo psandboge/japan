@@ -5,6 +5,14 @@
     <title>Grammatik</title>
 </head>
 <body>
+<script>
+    function say(text) {
+        var msg = new SpeechSynthesisUtterance();
+        msg.text = text;
+        msg.lang = 'ja-JP';
+        speechSynthesis.speak(msg);
+    }
+</script>
 <h1>Grammatik</h1>
 <a id="te"></a><h2>Te-form</h2>
 <h3>Ru-verb</h3>
@@ -62,11 +70,11 @@ Te-form + iru:<br>
 <p>...</p>
 <h4>2. Skeenden</h4>
 <p>Jag studerar (just nu)<br>
-私は勉強してします</p>
+私は勉強しています<span onclick="say('私は勉強しています')">&#x1f508;</span></p>
 <p>Jag studerar (läser en kurs e.d., men jag studerar inte nödvändigtvis just nu, i denna sekund.)<br>
-私は勉強しています</p>
+私は勉強しています<span onclick="say('私は勉強しています')">&#x1f508;</span></p>
 <p>Jag studerar på fredag varje vecka<br>
-私は毎週金曜日にべんきょうします</p>
+私は毎週金曜日にべんきょうします<span onclick="say('私は毎週金曜日にべんきょうします')">&#x1f508;</span></p>
 <h4>3. Tillståndsändringar</h4>
 <p>Jag sätter mig<br>
 私はすわります</p>
@@ -328,6 +336,16 @@ Partiklaran ha, ga, och wo utelämnas dock helt.</p>
 <hr>
 <a id="mada"></a><h2>Mada...teimasen</h2>
 <p>Mada...teimasen = har inte...ännu.</p>
+<hr>
+<a id="naru"></a><h2>Naru</h2>
+<p>Naru betyder "att bli", och fungerar med adjektiv och substantiv. Ta bort avlutande i respektive na för adjektiv.<br>
+i-adjektiv: lägg på kunari<br>
+na-adjektiv och substantiv: lägg på ninaru</p>
+<p>
+    青くなる<br>
+    好きになる<br>
+    学院生になる<br>
+</p>
 <hr>
 <a id="nopronomen"></a><h2>No som pronomen</h2>
 <p>Ett substantiv efter ett adjektiv kan ersättas med no om det redan nämnts i konverationen och det är klart vad
