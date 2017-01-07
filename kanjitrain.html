@@ -6,100 +6,57 @@
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
+<p id="question"></p>
 <script>
-//    大	だい
-//    おお	stor		小	しょう
-//    ちい	liten
-//    高	たか
-//    hög
-//    dyr		安	やす
-//    billig
-//    lätthet
-//    新	しん
-//    あたら	ny		古	ふる
-//    gammal
-//    元	げん
-//    ursprung		気	き
-//    ande
-//    多	おお
-//    många
-//    mycket		少	すこ
-//    すく	få
-//    lite
-//    広	ひろ
-//    rymlig		早	はや
-//    tidigt
-//    長	なが
-//    lång
-//    chef		明	みょう
-//    あか
-//    あ	ljus
-//    好	す
-//    gilla		友	とも
-//    vän
-//    入	にゅう
-//    はい
-//    い	gå in		出	で
-//    だ	gå ut
-//    市	し
-//    marknad
-//    storstad		町	まち
-//    stad
-//    村	むら
-//    by		雨	あめ
-//    regn
-//    電	でん
-//    el		車	しゃ
-//    くるま	bil
-//    馬	うま
-//    häst		駅	えき
-//    station
-//    社	しゃ
-//    företag
-//    altare		校	こう
-//    skola
-//    店	てん
-//    みせ	affär		銀	ぎん
-//    silver
-//    病	びょう
-//    sjukdom
-//    院	いん
-//    institution		休	やす
-//    vila
-//    走	はし
-//    springa		起	お
-//    vakna
-//    stiga upp
-//    貝	かい
-//    skaldjur		買	か
-//    köpa
-//    売	う
-//    sälja		読	よ
-//    läsa
-//    書	か
-//    skriva		帰	かえ
-//    återvända
-//    勉	べん
-//    anstränga		弓	ゆみ
-//    båge
-//    虫	むし
-//    insekt		強	きょう
-//    つよ	styrka
-//    持	も
-//    hålla		名	な
-//    namn
-//    語	ご
-//    språk		春	はる
-//    vår
 var words = [
-//    ['a','b'],
-//    ['a','b'],
-//    ['a','b'],
-//    ['a','b'],
-//    ['a','b'],
-//    ['a','b'],
-//    ['a','b'],
-//    ['a','b'],
+    ['stor','大'],
+    ['liten','小'],
+    ['dyr, hög','高'],
+    ['lätthet, billig','安'],
+    ['ny','新'],
+    ['gammal','古'],
+    ['ursprung','元'],
+    ['ande','気'],
+    ['mycket, många','多'],
+    ['lite, få','少'],
+    ['rymlig','広'],
+    ['tidigt','早'],
+    ['lång','長'],
+    ['ljus','明'],
+    ['gilla','好'],
+    ['vän','友'],
+    ['gå in','入'],
+    ['gå ut','出'],
+    ['storstad, marknad','市'],
+    ['stad','町'],
+    ['by','村'],
+    ['regn','雨'],
+    ['el','電'],
+    ['bil','車'],
+    ['häst','馬'],
+    ['station','駅'],
+    ['företag','社'],
+    ['skola','校'],
+    ['affär','店'],
+    ['silver','銀'],
+    ['sjukdom','病'],
+    ['institution','院'],
+    ['vila','休'],
+    ['springa','走'],
+    ['stiga upp, vakna','起'],
+    ['skaldjur','貝'],
+    ['köpa','買'],
+    ['sälja','売'],
+    ['läsa','読'],
+    ['skriva','書'],
+    ['återvända','帰'],
+    ['anstränga','勉'],
+    ['båge','弓'],
+    ['insekt','虫'],
+    ['styrka','強'],
+    ['hålla','持'],
+    ['namn','名'],
+    ['språk','語'],
     ['vår','春'],
     ['sommar','夏'],
     ['höst','秋'],
@@ -172,16 +129,24 @@ function getRandomInt() {
 function newKanji() {
     kanji = getRandomInt();
     document.getElementById('question').innerText=words[kanji][0];
-    }
+    document.getElementById('answer').innerText='?';
+}
 
-    function showKanji() {
+function nextKanji() {
+    kanji = (kanji + 1) % words.length;
+    document.getElementById('question').innerText=words[kanji][0];
+    document.getElementById('answer').innerText='?';
+}
+
+function showKanji() {
         document.getElementById('answer').innerText=words[kanji][1];
     }
+document.getElementById('question').innerText=words[0][0];
 </script>
-<p id="question">?</p>
 <p class="ultra-large" id="answer">?</p>
 <button onclick="showKanji();">SHOW</button>
-<button onclick="newKanji();">NEW</button>
+<button onclick="newKanji();">RANDOM</button>
+<button onclick="nextKanji();">NEXT</button>
 <table>
     <tr><th>kanji</th><th>reading</th><th>svenska</th><th>SVG</th><th>kanji</th><th>reading</th><th>svenska</th><th>SVG</th></tr>
     <tr>
