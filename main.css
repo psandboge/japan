@@ -1,0 +1,20 @@
+body {
+    background: #eeefff; // url("gota.jpg") no-repeat;
+    background-size: 1270px, 275px;
+}
+h1, h2, p, td {
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: normal;
+}
+
+td {
+    font-size: x-large;
+}
+
+.smaller {
+    font-size: medium;
+}
+
+.ultra-large {
+    font-size: 700%;
+}
