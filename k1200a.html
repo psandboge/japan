@@ -5,122 +5,76 @@
     <title>Daigaku Sverige</title>
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
-<body>
+<body onload="init();">
 <p id="question"></p>
 <script>
 var words = [
-    ['stor','大'],
-    ['liten','小'],
-    ['dyr, hög','高'],
-    ['lätthet, billig','安'],
-    ['ny','新'],
-    ['gammal','古'],
-    ['ursprung','元'],
-    ['ande','気'],
-    ['mycket, många','多'],
-    ['lite, få','少'],
-    ['rymlig','広'],
-    ['tidigt','早'],
-    ['lång','長'],
-    ['ljus','明'],
-    ['gilla','好'],
-    ['vän','友'],
-    ['gå in','入'],
-    ['gå ut','出'],
-    ['storstad, marknad','市'],
-    ['stad','町'],
-    ['by','村'],
-    ['regn','雨'],
-    ['el','電'],
-    ['bil','車'],
-    ['häst','馬'],
-    ['station','駅'],
-    ['företag','社'],
-    ['skola','校'],
-    ['affär','店'],
-    ['silver','銀'],
-    ['sjukdom','病'],
-    ['institution','院'],
-    ['vila','休'],
-    ['springa','走'],
-    ['stiga upp, vakna','起'],
-    ['skaldjur','貝'],
-    ['köpa','買'],
-    ['sälja','売'],
-    ['läsa','読'],
-    ['skriva','書'],
-    ['återvända','帰'],
-    ['anstränga','勉'],
-    ['båge','弓'],
-    ['insekt','虫'],
-    ['styrka','強'],
-    ['hålla','持'],
-    ['namn','名'],
-    ['språk','語'],
-    ['vår','春'],
-    ['sommar','夏'],
-    ['höst','秋'],
-    ['vinter','冬'],
-    ['morgon','朝'],
-    ['dagtid','昼'],
-    ['kvällning','夕'],
-    ['riktning','方'],
-    ['kväll','晩'],
-    ['natt','夜'],
-    ['hjärta','心'],
-    ['hand','手'],
-    ['fot','足'],
-    ['kropp','体'],
-    ['hals','首'],
-    ['väg','道'],
-    ['berg','山'],
-    ['flod','川'],
-    ['liten skog','林'],
-    ['stor skog','森'],
-    ['tomhet, himmel','空'],
-    ['hav','海'],
-    ['förändring','化'],
-    ['blomma','花'],
-    ['himmel','天'],
-    ['röd','赤'],
-    ['blå','青'],
-    ['vit','白'],
-    ['svart','黒'],
-    ['färg','色'],
-    ['fisk','魚'],
-    ['hund','犬'],
-    ['avgift, ingrediens','料'],
-    ['förnuft','理'],
-    ['anti-','反'],
-    ['kokt ris, måltid','飯'],
-    ['boskap','牛'],
-    ['gris','豚'],
-    ['fågel','鳥'],
-    ['kött','肉'],
-    ['te','茶'],
-    ['i förväg','予'],
-    ['fält','野'],
-    ['grönsak','菜'],
-    ['hugga','切'],
-    ['skapa','作'],
-    ['inte ännu','未'],
-    ['smak','味'],
-    ['ljud','音'],
-    ['bekvämt, roligt','楽'],
-    ['sjunga','歌'],
-    ['själv','自'],
-    ['rulla','転'],
-    ['borda','乗'],
-    ['fotografera, kopiera','写'],
-    ['sann','真'],
-    ['stånd','台'],
-    ['projicera','映'],
-    ['bild','画'],
-    ['får','羊'],
-    ['utländsk','洋'],
-    ['kläder','服'],
-    ['anlända, bära kläder', '着'],
-    ];
+    ['sända(おく)','送'],
+    ['tänka, idé(かんが)','考'],
+    ['person(しゃ)','者'],
+    ['ceremoni(しき)','式'],
+    ['undersöka(けん)','験'],
+    ['dra(ひ)','引'],
+    ['tvätta(あら)','洗'],
+    ['papper(かみ、がみ)','紙'],
+    ['tänka(おも)','思'],
+    ['yngre bror(だい、おとうと)','弟'],
+    ['kina(かん)','漢'],
+    ['skynda sig(きゅう、いそ)','急'],
+    ['tjock(ふと)','太'],
+    ['man(おっと)','夫'],
+    ['svag(よわ)','弱'],
+    ['min man(しゅ)','主'],
+    ['äldre bror(きょう、あに)','兄'],
+    ['böna(まめ)','豆'],
+    ['ljus(ひかり、ひか)','光'],
+    ['transportera, tur(うん、はこ)','運'],
+    ['ämne(だい)','題'],
+    ['låg(ひく)','低'],
+    ['bo(す)','住'],
+    ['fråga(もん)','問'],
+    ['bokstav, tecken(じ)','字'],
+    ['lära ut(きょう、おし)','教'],
+    ['långt bort(とお)','遠'],
+    ['stoppa(し、と)','止'],
+    ['försöka(し)','試'],
+    ['gå(ある)','歩'],
+    ['död(し)','死'],
+    ['använda(つか)','使'],
+    ['mening, tecken(ぶん)','文'],
+    ['stänga(し)','閉'],
+    ['öppna(あ、ひら)','開'],
+    ['het(あつ)','暑'],
+    ['mörk(くら)','暗'],
+    ['rum(しつ)','室'],
+    ['vind(ふう、かぜ)','風'],
+    ['dålig(わる)','悪'],
+    ['förälder, intimitet(しん、おや)','親'],
+    ['förklara(せつ)','説'],
+    ['hus(か、いえ)','家'],
+    ['yngre syster(いもうと)','妹'],
+    ['fru(つま)','妻'],
+    ['trycka(お)','押'],
+    ['vinge(はね)','羽'],
+    ['värdshus(しゅく)','宿'],
+    ['jag, privat(わたくし、わたし)','私'],
+    ['äldre syster(あね)','姉'],
+    ['tung(おも)','重'],
+    ['familj(ぞく)','族'],
+    ['nära(ちか)','近'],
+    ['kall(さむ)','寒'],
+    ['lära sig(なら)','習'],
+    ['flytta(どう、うご)','動'],
+    ['veta(し)','知'],
+    ['kvalitet(しつ)','質'],
+    ['kort(みじか)','短'],
+    ['engelska, utmärkt(えい)','英'],
+    ['tråd(いと)','糸'],
+    ['lätt(かる)','軽'],
+    ['pil(や)','矢'],
+    ['efternamn(し)','氏'],
+    ['ett(いち、ひと)','一'],
+];
 var kanji = 0;
 function getRandomInt() {
     max = words.length;
@@ -129,21 +83,75 @@ function getRandomInt() {
 function newKanji() {
     kanji = getRandomInt();
     document.getElementById('question').innerText=words[kanji][0];
-    document.getElementById('answer').innerText='?';
+    document.getElementById('answer').innerText=' ';
 }
 
 function nextKanji() {
     kanji = (kanji + 1) % words.length;
     document.getElementById('question').innerText=words[kanji][0];
-    document.getElementById('answer').innerText='?';
+    document.getElementById('answer').innerText=' ';
 }
 
 function showKanji() {
         document.getElementById('answer').innerText=words[kanji][1];
     }
 document.getElementById('question').innerText=words[0][0];
+
+var myPen;
+function init() {
+    var canvas = document.getElementById('drawing');
+    var context = canvas.getContext('2d');
+    canvas.addEventListener('mousedown', handleMouseEvent, false);
+    canvas.addEventListener('mouseup', handleMouseEvent, false);
+    canvas.addEventListener('mousemove', handleMouseEvent, false);
+
+    myPen = new Pen(context);
+}
+
+function Pen(context) {
+    var isDrawing = false;
+    var self = this;
+
+    self.mousedown = function(e, x, y) {
+        context.beginPath();
+        context.moveTo(x, y);
+        isDrawing = true;
+    };
+
+    self.mouseup = function(e, x, y) {
+        if (isDrawing) {
+            self.mousemove(e);
+            isDrawing = false;
+        }
+    };
+    self.mousemove = function(e, x, y) {
+        if (isDrawing) {
+            context.lineTo(x, y);
+            context.stroke();
+        }
+    };
+}
+function handleMouseEvent(e) {
+    var x = 0, y = 0;
+    if (e.layerX || e.layerX === 0) {
+        x = e.layerX;
+        y = e.layerY;
+    } else if (e.offsetX || e.offsetX === 0) {
+        x = e.offsetX;
+        y = e.offsetY;
+    }
+    if (myPen[e.type]) {
+        myPen[e.type](e,x,y);
+    }
+    console.log(e.type, x, y);
+}
+
+
 </script>
-<p class="ultra-large" id="answer">?</p>
+<div id="holder">
+    <canvas id="drawing" width="200" height="200"></canvas>
+</div>
+<p class="ultra-large" id="answer"> </p>
 <button onclick="showKanji();">SHOW</button>
 <button onclick="newKanji();">RANDOM</button>
 <button onclick="nextKanji();">NEXT</button>
