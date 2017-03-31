@@ -84,12 +84,18 @@ function newKanji() {
     kanji = getRandomInt();
     document.getElementById('question').innerText=words[kanji][0];
     document.getElementById('answer').innerText=' ';
+    var ctx = document.getElementById('drawing').getContext('2d');
+    ctx.clearRect(0, 0, 200,200);
+    ctx.beginPath();
 }
 
 function nextKanji() {
     kanji = (kanji + 1) % words.length;
     document.getElementById('question').innerText=words[kanji][0];
     document.getElementById('answer').innerText=' ';
+    var ctx = document.getElementById('drawing').getContext('2d');
+    ctx.clearRect(0, 0, 200,200);
+    ctx.beginPath();
 }
 
 function showKanji() {
@@ -107,6 +113,44 @@ function init() {
 
     myPen = new Pen(context);
 }
+canvas.addEventListener("touchstart", function (e) {
+//    var mousePos = getTouchPos(canvas, e);
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousedown", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+}, false);
+
+canvas.addEventListener("touchend", function (e) {
+    var mouseEvent = new MouseEvent("mouseup", {});
+    canvas.dispatchEvent(mouseEvent);
+}, false);
+canvas.addEventListener("touchmove", function (e) {
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousemove", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+}, false);
+
+document.body.addEventListener("touchstart", function (e) {
+    if (e.target == canvas) {
+        e.preventDefault();
+    }
+}, false);
+document.body.addEventListener("touchend", function (e) {
+    if (e.target == canvas) {
+        e.preventDefault();
+    }
+}, false);
+document.body.addEventListener("touchmove", function (e) {
+    if (e.target == canvas) {
+        e.preventDefault();
+    }
+}, false);
 
 function Pen(context) {
     var isDrawing = false;
