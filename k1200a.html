@@ -85,7 +85,7 @@ function newKanji() {
     document.getElementById('question').innerText=words[kanji][0];
     document.getElementById('answer').innerText=' ';
     var ctx = document.getElementById('drawing').getContext('2d');
-    ctx.clearRect(0, 0, 200,200);
+    ctx.clearRect(0, 0, 400,400);
     ctx.beginPath();
 }
 
@@ -94,12 +94,13 @@ function nextKanji() {
     document.getElementById('question').innerText=words[kanji][0];
     document.getElementById('answer').innerText=' ';
     var ctx = document.getElementById('drawing').getContext('2d');
-    ctx.clearRect(0, 0, 200,200);
+    ctx.clearRect(0, 0, 400,400);
     ctx.beginPath();
 }
 
 function showKanji() {
-        document.getElementById('answer').innerText=words[kanji][1];
+    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+    document.getElementById('answer').innerHTML='<img width = "400" src="svg/0' + hex + '.svg"/>';
     }
 document.getElementById('question').innerText=words[0][0];
 
@@ -113,7 +114,6 @@ function init() {
 
     myPen = new Pen(context);
     canvas.addEventListener("touchstart", function (e) {
-//    var mousePos = getTouchPos(canvas, e);
         var touch = e.touches[0];
         var mouseEvent = new MouseEvent("mousedown", {
             clientX: touch.clientX,
@@ -193,7 +193,7 @@ function handleMouseEvent(e) {
 
 </script>
 <div id="holder">
-    <canvas id="drawing" width="200" height="200"></canvas>
+    <canvas id="drawing" width="400" height="400"></canvas>
 </div>
 <p class="ultra-large" id="answer"> </p>
 <button onclick="showKanji();">SHOW</button>
