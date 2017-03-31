@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Daigaku Sverige</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body onload="init();">
@@ -80,34 +81,43 @@ function getRandomInt() {
     max = words.length;
     return Math.floor(Math.random() * (max));
 }
+function clearCanvas() {
+    var ctx = document.getElementById('drawing').getContext('2d');
+    ctx.clearRect(0, 0, 400,400);
+    ctx.beginPath();
+}
 function newKanji() {
     kanji = getRandomInt();
     document.getElementById('question').innerText=words[kanji][0];
     document.getElementById('answer').innerText=' ';
-    var ctx = document.getElementById('drawing').getContext('2d');
-    ctx.clearRect(0, 0, 400,400);
-    ctx.beginPath();
+    clearCanvas();
 }
-
+var isShowing = false;
 function nextKanji() {
     kanji = (kanji + 1) % words.length;
     document.getElementById('question').innerText=words[kanji][0];
     document.getElementById('answer').innerText=' ';
-    var ctx = document.getElementById('drawing').getContext('2d');
-    ctx.clearRect(0, 0, 400,400);
-    ctx.beginPath();
+    clearCanvas();
 }
 
 function showKanji() {
-    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
-    document.getElementById('answer').innerHTML='<img width = "400" src="svg/0' + hex + '.svg"/>';
+    if (isShowing) {
+        isShowing = false;
+        document.getElementById('answer').innerText=' ';
+    } else {
+        isShowing = true;
+        var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+        document.getElementById('answer').innerHTML = '<img width = "400" src="svg/0' + hex + '.svg"/>';
     }
+}
+
 document.getElementById('question').innerText=words[0][0];
 
 var myPen;
 function init() {
     var canvas = document.getElementById('drawing');
     var context = canvas.getContext('2d');
+    context.strokeStyle="#ddaa88";
     canvas.addEventListener('mousedown', handleMouseEvent, false);
     canvas.addEventListener('mouseup', handleMouseEvent, false);
     canvas.addEventListener('mousemove', handleMouseEvent, false);
@@ -199,6 +209,7 @@ function handleMouseEvent(e) {
 <button onclick="showKanji();">SHOW</button>
 <button onclick="newKanji();">RANDOM</button>
 <button onclick="nextKanji();">NEXT</button>
+<button onclick="clearCanvas();">CLEAR</button>
 <table>
     <tr><th>kanji</th><th>reading</th><th>svenska</th><th>SVG</th><th>kanji</th><th>reading</th><th>svenska</th><th>SVG</th></tr>
     <tr>
