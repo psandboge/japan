@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanji för jp1200 skriftsystem 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body onload="init();">
+<p id="question"></p>
+<script>
+var words = [
+    ['a','ア'],
+    ['i','イ'],
+    ['u','ウ'],
+    ['e','エ'],
+    ['o','オ'],
+    ['ka','カ'],
+    ['ki','キ'],
+    ['ku','ク'],
+    ['ke','ケ'],
+    ['ko','コ'],
+    ['sa','サ'],
+    ['shi','シ'],
+    ['su','ス'],
+    ['se','セ'],
+    ['so','ソ'],
+    ['ta','タ'],
+    ['chi','チ'],
+    ['tsu','ツ'],
+    ['te','テ'],
+    ['to','ト'],
+    ['na','ナ'],
+    ['ni','ニ'],
+    ['nu','ヌ'],
+    ['ne','ネ'],
+    ['no','ノ'],
+    ['ha','ハ'],
+    ['hi','ヒ'],
+    ['fu','フ'],
+    ['he','ヘ'],
+    ['ho','ホ'],
+    ['ma','マ'],
+    ['mi','ミ'],
+    ['mu','ム'],
+    ['me','メ'],
+    ['mo','モ'],
+    ['ya','ヤ'],
+    ['yu','ユ'],
+    ['yo','ヨ'],
+    ['ra','ラ'],
+    ['ri','リ'],
+    ['ru','ル'],
+    ['re','レ'],
+    ['ro','ロ'],
+    ['wa','ワ'],
+    ['wo','ヲ'],
+    ['n','ン'],
+];
+var kanji = 0;
+var isShowing = false;
+function getRandomInt() {
+    max = words.length;
+    return Math.floor(Math.random() * (max));
+}
+function clearCanvas() {
+    var ctx = document.getElementById('drawing').getContext('2d');
+    ctx.clearRect(0, 0, 400,400);
+    ctx.beginPath();
+}
+function updateKanji() {
+    document.getElementById('question').innerText=words[kanji][0];
+    document.getElementById('answer').innerText=' ';
+    clearCanvas();
+    isShowing = false;
+}
+function newKanji() {
+    kanji = getRandomInt();
+    updateKanji();
+}
+function nextKanji() {
+    kanji = (kanji + 1) % words.length;
+    updateKanji();
+}
+function prevKanji() {
+    kanji = (kanji - 1 + words.length) % words.length;
+    updateKanji();
+}
+
+function showKanji() {
+    if (isShowing) {
+        isShowing = false;
+        document.getElementById('answer').innerText=' ';
+    } else {
+        isShowing = true;
+        var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+        document.getElementById('answer').innerHTML = '<img width = "400" src="svg/0' + hex + '.svg"/>';
+    }
+}
+
+document.getElementById('question').innerText=words[0][0];
+
+var myPen;
+function init() {
+    var canvas = document.getElementById('drawing');
+    var context = canvas.getContext('2d');
+    context.strokeStyle="#995522";
+    context.lineWidth=6;
+    canvas.addEventListener('mousedown', handleMouseEvent, false);
+    canvas.addEventListener('mouseup', handleMouseEvent, false);
+    canvas.addEventListener('mousemove', handleMouseEvent, false);
+
+    myPen = new Pen(context);
+    canvas.addEventListener("touchstart", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousedown", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    canvas.addEventListener("touchend", function (e) {
+        var mouseEvent = new MouseEvent("mouseup", {});
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchmove", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousemove", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    document.body.addEventListener("touchstart", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchend", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchmove", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+}
+
+function Pen(context) {
+    var isDrawing = false;
+    var self = this;
+
+    self.mousedown = function(e, x, y) {
+        context.beginPath();
+        context.moveTo(x, y);
+        isDrawing = true;
+    };
+
+    self.mouseup = function(e, x, y) {
+        if (isDrawing) {
+            self.mousemove(e);
+            isDrawing = false;
+        }
+    };
+    self.mousemove = function(e, x, y) {
+        if (isDrawing) {
+            context.lineTo(x, y);
+            context.stroke();
+        }
+    };
+}
+function handleMouseEvent(e) {
+    var x = 0, y = 0;
+    if (e.layerX || e.layerX === 0) {
+        x = e.layerX;
+        y = e.layerY;
+    } else if (e.offsetX || e.offsetX === 0) {
+        x = e.offsetX;
+        y = e.offsetY;
+    }
+    if (myPen[e.type]) {
+        myPen[e.type](e,x,y);
+    }
+    console.log(e.type, x, y);
+}
+
+
+</script>
+<div id="holder">
+    <canvas id="drawing" width="400" height="400"></canvas>
+</div>
+<p class="ultra-large" id="answer"> </p>
+<button onclick="showKanji();">VISA</button>
+<button onclick="newKanji();">SLUMPVIS</button>
+<button onclick="nextKanji();">NÄSTA</button>
+<button onclick="prevKanji();">FÖREGÅENDE</button>
+<button onclick="clearCanvas();">RENSA</button>
+<footer>
+    <p>I would like to thank the Kanji VG project (http://kanjivg.tagaini.net/). I am not associated with Kanji VG, just a user.
+        The kanji (and kana) svg files (i.e. the kanji drawings with stroke order) are used by permission under the following licens:</p>
+    <h4>Licence</h4>
+    <p>KanjiVG is copyright © 2009-2015 Ulrich Apel and released under the Creative Commons Attribution-Share Alike 3.0 license.<br>
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/">https://creativecommons.org/licenses/by-sa/3.0/</a></p>
+</footer>
+</body>
+</html>
