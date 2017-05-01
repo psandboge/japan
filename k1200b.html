@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanji för jp1200 skriftsystem 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body onload="init();">
+<p id="question"></p>
+<script>
+var words = [
+    ['rund(まる)','丸'],
+    ['hetta(ねつ、ねっ、あつ)','熱'],
+    ['frysa(つめ、ひ、さ)','冷い'],
+    ['söt(あま)','甘'],
+    ['smutsig(きたな、よご)','汚'],
+    ['frukt(*くだ)','果'],
+    ['ägg(たまご)','卵'],
+    ['tallrik(さら)','皿'],
+    ['alkohol(しゅ、さけ、さか)','酒'],
+    ['salt(しお)','塩'],
+    ['fästa(つ、づ)','付'],
+    ['ena sidan(かた)','片'],
+    ['bränna(や)','焼く'],
+    ['slå av,försvinna(しょう、け、き)','消'],
+    ['hård(かた)','固'],
+    ['individ(こ)','個'],
+
+    ['lära ut(きょう、おし)','教'],
+    ['rum(しつ)','室'],
+    ['vinge(はね)','羽'],
+    ['lära sig(なら)','習'],
+    ['kina(かん)','漢'],
+    ['bokstav, tecken(じ)','字'],
+    ['ceremoni(しき)','式'],
+    ['försöka(し)','試'],
+    ['undersöka(けん)','験'],
+    ['värdshus(しゅく)','宿'],
+    ['ämne(だい)','題'],
+    ['mening, tecken(ぶん)','文'],
+    ['engelska, utmärkt(えい)','英'],
+    ['kvalitet(しつ)','質'],
+    ['fråga(もん)','問'],
+    ['förklara(せつ)','説'],
+    ['långt bort(とお)','遠'],
+    ['nära(ちか)','近'],
+    ['person(しゃ)','者'],
+    ['het(あつ)','暑'],
+    ['kall(さむ)','寒'],
+    ['tung(おも)','重'],
+    ['lätt(かる)','軽'],
+    ['låg(ひく)','低'],
+    ['svag(よわ)','弱'],
+    ['dålig(わる)','悪'],
+    ['mörk(くら)','暗'],
+    ['tjock(ふと)','太'],
+    ['böna(まめ)','豆'],
+    ['kort(みじか)','短'],
+    ['ljus(ひかり、ひか)','光'],
+    ['vind(ふう、かぜ)','風'],
+    ['transportera, tur(うん、はこ)','運'],
+    ['flytta(どう、うご)','動'],
+    ['stoppa(し、と)','止'],
+    ['gå(ある)','歩'],
+    ['använda(つか)','使'],
+    ['sända(おく)','送'],
+    ['tvätta(あら)','洗'],
+    ['skynda sig(きゅう、いそ)','急'],
+    ['öppna(あ、ひら)','開'],
+    ['stänga(し)','閉'],
+    ['trycka(お)','押'],
+    ['dra(ひ)','引'],
+    ['tänka(おも)','思'],
+    ['tänka, idé(かんが)','考'],
+    ['veta(し)','知'],
+    ['död(し)','死'],
+    ['doktor, medicin(い)','医'],
+    ['börja(はじ)','始'],
+    ['sluta(お)','終'],
+    ['sten(いし)','石'],
+    ['polera(けん)','研'],
+    ['forskning(きゅう)','究'],
+    ['stanna(りゅう)','留'],
+    ['existera(ゆう)','有'],
+    ['producera(さん)','産'],
+    ['affärer(ぎょう)','業'],
+    ['medicin(くすり)','薬'],
+    ['arbeta(はたら)','働'],
+    ['medlem(いん)','員'],
+    ['samurai(し)','士'],
+    ['tjäna(し)','仕'],
+    ['sak(じ、こと、ごと)','事'],
+    ['teckning(と、ず)','図'],
+    ['ämbetsman(かん)','官'],
+    ['byggnad(かん)','館'],
+    ['urtida(むかし)','昔'],
+    ['låna(か)','借'],
+    ['tidsålder,ersätta(だい、か)','代'],
+    ['låna ut(か)','貸'],
+    ['land(ち)','地'],
+    ['värld(せ)','世'],
+    ['gräns(かい)','界'],
+    ['gånger,grader(ど)','度'],
+    ['rotera(かい、まわ)','回'],
+    ['använda(よう)','用'],
+    ['folk(みん)','民'],
+    ['hälla(ちゅう)','注'],
+    ['sinne(い)','意'],
+    ['huvud(あたま)','頭'],
+    ['ansikte(かお)','顔'],
+    ['röst(こえ)','声'],
+    ['speciell(とく)','特'],
+    ['separera(べつ、わか)','別'],
+    ['bambu(たけ)','竹'],
+    ['passa(あ)','合'],
+    ['svara(こた)','答'],
+    ['rätt(しょう、せい、ただ)','正'],
+    ['samma(おな)','同'],
+    ['mäta(けい)','計'],
+    ['huvudstad(きょう)','京'],
+    ['samla(あつ)','集'],
+    ['icke(ふ)','不'],
+    ['bekväm,post(べん)','便'],
+    ['startpunkt(い)','以'],
+    ['plats(じょう、ば)','場'],
+    ['dörr(と)','戸'],
+    ['plats(しょ、じょ、ところ、どころ)','所'],
+    ['tak,affär(おく、や)','屋'],
+    ['hall(どう)','堂'],
+    ['metropolis(と)','都'],
+    ['prefektur(けん)','県'],
+    ['zon(く)','区'],
+    ['damm(ち、いけ)','池'],
+    ['starta,avslöja(はつ、ばつ)','発'],
+    ['bygga(た)','建'],
+    ['sak(ぶつ、もの)','物'],
+    ['gods(しな)','品'],
+    ['resa(りょ)','旅'],
+    ['passera,pendla(とお、かよ)','通'],
+    ['avancera(すす)','進'],
+
+    ['hjärta(しん、こころ)','心'],
+    ['i(なか、ちゅう','中'],
+    ['sak(ぶつ、もの)','物'],
+    ['tak,affär(おく、や)','屋'],
+    ['dag(ひ、に)','日'],
+    ['bok(ほん)','本'],
+    ['dricka(飲)','飲'],
+    ['transportera, tur(うん、はこ)','運'],
+    ['rulla(てん)','転'],
+    ['passa(あ)','合'],
+    ['väg(みち)','道'],
+    ['ändring(か)','化'],
+    ['ett(いっ)','一個'],
+    ['person(じん)','人'],
+
+    ['möte(あ)','会'],
+    ['födelse(う)','生'],
+    ['projicera(えい)','映'],
+    ['stor(おお、だい)','大'],
+    ['träd(き、もく)','本'],
+    ['i(なか、ちゅう、じゅう)','中'],
+    ['bild(が)','画'],
+    ['helgedom(しゃ、じゃ)','社'],
+    ['ha på sig,anlända(き、ぎ、つ)','着'],
+    ['hand(て、しゅ)','手'],
+    ['vad?(なに、なん)','何'],
+    ['göra(つく、づく)','作'],
+    ['ingång(はい)','入'],
+    ['skola(がく)','学'],
+    ['eld(ひ、か)','火'],
+    ['prata(はな、はなし)','話'],
+    ['öst(とう、ひがし)','東'],
+    ['smak(あじ)','味'],
+    ['lång,chef(なが、ちょう)','長'],
+    ['silver(ぎん)','銀'],
+    ['se(み)','見'],
+    ['mellan(かん、あいだ)','間'],
+    ['nacke(くび)','首'],
+    ['affär(てん、みせ)','店'],
+    ['språk(ご)','語'],
+    ['köpa(か)','買'],
+    ['människa(ひと)','人'],
+    ['nu(いま)','今'],
+    ['fordon(くるま、しゃ)','車'],
+    ['fält(や、の)','野'],
+    ['äta(た、しょく)','食'],
+    ['rulla(てん)','転'],
+    ['hantverk(こう)','工'],
+    ['själv(じ)','自'],
+    ['stånd(たい)','台'],
+    ['sälja(う)','売'],
+    ['dricka(の)','飲'],
+    ['ljud(おん、おと)','音'],
+    ['skriva(か)','書'],
+    ['ut(だ、で)','出'],
+    ['el(でん)','電'],
+    ['middag(ご)','午'],
+    ['åka(い)','行'],
+];
+var kanji = 0;
+var isShowing = false;
+function getRandomInt() {
+    max = words.length;
+    return Math.floor(Math.random() * (max));
+}
+function clearCanvas() {
+    var ctx = document.getElementById('drawing').getContext('2d');
+    ctx.clearRect(0, 0, 400,400);
+    ctx.beginPath();
+}
+function updateKanji() {
+    document.getElementById('question').innerText=words[kanji][0];
+    document.getElementById('answer').innerText=' ';
+    clearCanvas();
+    isShowing = false;
+}
+function newKanji() {
+    kanji = getRandomInt();
+    updateKanji();
+}
+function nextKanji() {
+    kanji = (kanji + 1) % words.length;
+    updateKanji();
+}
+function prevKanji() {
+    kanji = (kanji - 1 + words.length) % words.length;
+    updateKanji();
+}
+
+function showKanji() {
+    if (isShowing) {
+        isShowing = false;
+        document.getElementById('answer').innerText=' ';
+    } else {
+        isShowing = true;
+        var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+        document.getElementById('answer').innerHTML = '<img width = "400" src="svg/0' + hex + '.svg"/>';
+    }
+}
+
+document.getElementById('question').innerText=words[0][0];
+
+var myPen;
+function init() {
+    var canvas = document.getElementById('drawing');
+    var context = canvas.getContext('2d');
+    context.strokeStyle="#995522";
+    context.lineWidth=6;
+    canvas.addEventListener('mousedown', handleMouseEvent, false);
+    canvas.addEventListener('mouseup', handleMouseEvent, false);
+    canvas.addEventListener('mousemove', handleMouseEvent, false);
+
+    myPen = new Pen(context);
+    canvas.addEventListener("touchstart", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousedown", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    canvas.addEventListener("touchend", function (e) {
+        var mouseEvent = new MouseEvent("mouseup", {});
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchmove", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousemove", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    document.body.addEventListener("touchstart", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchend", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchmove", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+}
+
+function Pen(context) {
+    var isDrawing = false;
+    var self = this;
+
+    self.mousedown = function(e, x, y) {
+        context.beginPath();
+        context.moveTo(x, y);
+        isDrawing = true;
+    };
+
+    self.mouseup = function(e, x, y) {
+        if (isDrawing) {
+            self.mousemove(e);
+            isDrawing = false;
+        }
+    };
+    self.mousemove = function(e, x, y) {
+        if (isDrawing) {
+            context.lineTo(x, y);
+            context.stroke();
+        }
+    };
+}
+function handleMouseEvent(e) {
+    var x = 0, y = 0;
+    if (e.layerX || e.layerX === 0) {
+        x = e.layerX;
+        y = e.layerY;
+    } else if (e.offsetX || e.offsetX === 0) {
+        x = e.offsetX;
+        y = e.offsetY;
+    }
+    if (myPen[e.type]) {
+        myPen[e.type](e,x,y);
+    }
+    console.log(e.type, x, y);
+}
+
+
+</script>
+<div id="holder">
+    <canvas id="drawing" width="400" height="400"></canvas>
+</div>
+<p class="ultra-large" id="answer"> </p>
+<button onclick="showKanji();">VISA</button>
+<button onclick="newKanji();">SLUMPVIS</button>
+<button onclick="nextKanji();">NÄSTA</button>
+<button onclick="prevKanji();">FÖREGÅENDE</button>
+<button onclick="clearCanvas();">RENSA</button>
+<h2>Kanji som ingår i kursen</h2>
+<p>Observera att "ett" och framåt är repetition av tecken som inte är nya men ingår i glosorna.</p>
+<table>
+    <tr>
+        <td>家</td><td>か、いえ</td><td>hus</td><td><object data="svg/05bb6.svg" type="image/svg+xml"></object></td>
+        <td>矢</td><td>や</td><td>pil</td><td><object data="svg/077e2.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>族</td><td>ぞく</td><td>familj</td><td><object data="svg/065cf.svg" type="image/svg+xml"></object></td>
+        <td>親</td><td>しん、おや</td><td>förälder, intimitet</td><td><object data="svg/089aa.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>兄</td><td>きょう、あに</td><td>äldre bror</td><td><object data="svg/05144.svg" type="image/svg+xml"></object></td>
+        <td>姉</td><td>あね</td><td>äldre syster</td><td><object data="svg/059c9.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>弟</td><td>だい、おとうと</td><td>yngre bror</td><td><object data="svg/05f1f.svg" type="image/svg+xml"></object></td>
+        <td>妹</td><td>いもうと</td><td>yngre syster</td><td><object data="svg/059b9.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>私</td><td>わたくし、わたし</td><td>jag, privat</td><td><object data="svg/079c1.svg" type="image/svg+xml"></object></td>
+        <td>夫</td><td>おっと</td><td>man</td><td><object data="svg/0592b.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>妻</td><td>つま</td><td>fru</td><td><object data="svg/059bb.svg" type="image/svg+xml"></object></td>
+        <td>主</td><td>しゅ</td><td>huvudsaklig</td><td><object data="svg/04e3b.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>住</td><td>す</td><td>bo</td><td><object data="svg/04f4f.svg" type="image/svg+xml"></object></td>
+        <td>糸</td><td>いと</td><td>tråd</td><td><object data="svg/07cf8.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>氏</td><td>し</td><td>efternamn</td><td><object data="svg/06c0f.svg" type="image/svg+xml"></object></td>
+        <td>紙</td><td>かみ、がみ</td><td>papper</td><td><object data="svg/07d19.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>教</td><td>きょう、おし</td><td>lära ut</td><td><object data="svg/06559.svg" type="image/svg+xml"></object></td>
+        <td>室</td><td>しつ</td><td>rum</td><td><object data="svg/05ba4.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>羽</td><td>はね</td><td>vinge</td><td><object data="svg/07fbd.svg" type="image/svg+xml"></object></td>
+        <td>習</td><td>なら</td><td>lära sig</td><td><object data="svg/07fd2.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>漢</td><td>かん</td><td>kina</td><td><object data="svg/06f22.svg" type="image/svg+xml"></object></td>
+        <td>字</td><td>じ</td><td>bokstav, tecken</td><td><object data="svg/05b57.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>式</td><td>しき</td><td>ceremoni</td><td><object data="svg/05f0f.svg" type="image/svg+xml"></object></td>
+        <td>試</td><td>し</td><td>försöka</td><td><object data="svg/08a66.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>験</td><td>けん</td><td>undersöka</td><td><object data="svg/09a13.svg" type="image/svg+xml"></object></td>
+        <td>宿</td><td>しゅく</td><td>värdshus</td><td><object data="svg/05bbf.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>題</td><td>だい</td><td>ämne</td><td><object data="svg/0984c.svg" type="image/svg+xml"></object></td>
+        <td>文</td><td>ぶん</td><td>mening, tecken</td><td><object data="svg/06587.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>英</td><td>えい</td><td>engelska, utmärkt</td><td><object data="svg/082f1.svg" type="image/svg+xml"></object></td>
+        <td>質</td><td>しつ</td><td>kvalitet</td><td><object data="svg/08cea.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>問</td><td>もん</td><td>fråga</td><td><object data="svg/0554f.svg" type="image/svg+xml"></object></td>
+        <td>説</td><td>せつ</td><td>förklara</td><td><object data="svg/08aac.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>遠</td><td>とお</td><td>långt bort</td><td><object data="svg/09060.svg" type="image/svg+xml"></object></td>
+        <td>近</td><td>ちか</td><td>nära</td><td><object data="svg/08fd1.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>者</td><td>しゃ</td><td>person</td><td><object data="svg/08005.svg" type="image/svg+xml"></object></td>
+        <td>暑</td><td>あつ</td><td>het</td><td><object data="svg/06691.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>寒</td><td>さむ</td><td>kall</td><td><object data="svg/05bd2.svg" type="image/svg+xml"></object></td>
+        <td>重</td><td>おも</td><td>tung</td><td><object data="svg/091cd.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>軽</td><td>かる</td><td>lätt</td><td><object data="svg/08efd.svg" type="image/svg+xml"></object></td>
+        <td>低</td><td>ひく</td><td>låg</td><td><object data="svg/04f4e.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>弱</td><td>よわ</td><td>svag</td><td><object data="svg/05f31.svg" type="image/svg+xml"></object></td>
+        <td>悪</td><td>わる</td><td>dålig</td><td><object data="svg/060aa.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>暗</td><td>くら</td><td>mörk</td><td><object data="svg/06697.svg" type="image/svg+xml"></object></td>
+        <td>太</td><td>ふと</td><td>tjock</td><td><object data="svg/0592a.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>豆</td><td>まめ</td><td>böna</td><td><object data="svg/08c46.svg" type="image/svg+xml"></object></td>
+        <td>短</td><td>みじか</td><td>kort</td><td><object data="svg/077ed.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>光</td><td>ひかり、ひか</td><td>ljus</td><td><object data="svg/05149.svg" type="image/svg+xml"></object></td>
+        <td>風</td><td>ふう、かぜ</td><td>vind</td><td><object data="svg/098a8.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>運</td><td>うん、はこ</td><td>transportera, tur</td><td><object data="svg/0904b.svg" type="image/svg+xml"></object></td>
+        <td>動</td><td>どう、うご</td><td>flytta</td><td><object data="svg/052d5.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>止</td><td>し、と</td><td>stoppa</td><td><object data="svg/06b62.svg" type="image/svg+xml"></object></td>
+        <td>歩</td><td>ある</td><td>gå</td><td><object data="svg/06b69.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>使</td><td>つか</td><td>använda</td><td><object data="svg/04f7f.svg" type="image/svg+xml"></object></td>
+        <td>送</td><td>おく</td><td>sända</td><td><object data="svg/09001.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>洗</td><td>あら</td><td>tvätta</td><td><object data="svg/06d17.svg" type="image/svg+xml"></object></td>
+        <td>急</td><td>きゅう、いそ</td><td>skynda sig</td><td><object data="svg/06025.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>開</td><td>あ、ひら</td><td>öppna</td><td><object data="svg/0958b.svg" type="image/svg+xml"></object></td>
+        <td>閉</td><td>し</td><td>stänga</td><td><object data="svg/09589.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>押</td><td>お</td><td>trycka</td><td><object data="svg/062bc.svg" type="image/svg+xml"></object></td>
+        <td>引</td><td>ひ</td><td>dra</td><td><object data="svg/05f15.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>思</td><td>おも</td><td>tänka</td><td><object data="svg/0601d.svg" type="image/svg+xml"></object></td>
+        <td>考</td><td>かんが</td><td>tänka, idé</td><td><object data="svg/08003.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>知</td><td>し</td><td>veta</td><td><object data="svg/077e5.svg" type="image/svg+xml"></object></td>
+        <td>死</td><td>し</td><td>död</td><td><object data="svg/06b7b.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>医</td><td>い</td><td>doktor, medicin</td><td><object data="svg/0533b.svg" type="image/svg+xml"></object></td>
+        <td>始</td><td>はじ</td><td>börja</td><td><object data="svg/059cb.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>終</td><td>お</td><td>sluta</td><td><object data="svg/07d42.svg" type="image/svg+xml"></object></td>
+        <td>石</td><td>いし</td><td>sten</td><td><object data="svg/077f3.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>研</td><td>けん</td><td>polera</td><td><object data="svg/07814.svg" type="image/svg+xml"></object></td>
+        <td>究</td><td>きゅう</td><td>forskning</td><td><object data="svg/07a76.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>留</td><td>りゅう</td><td>stanna</td><td><object data="svg/07559.svg" type="image/svg+xml"></object></td>
+        <td>有</td><td>ゆう</td><td>existera</td><td><object data="svg/06709.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>産</td><td>さん</td><td>producera</td><td><object data="svg/07523.svg" type="image/svg+xml"></object></td>
+        <td>業</td><td>ぎょう</td><td>affärer</td><td><object data="svg/0696d.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>薬</td><td>くすり</td><td>medicin</td><td><object data="svg/085ac.svg" type="image/svg+xml"></object></td>
+        <td>働</td><td>はたら</td><td>arbeta</td><td><object data="svg/050cd.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>員</td><td>いん</td><td>medlem</td><td><object data="svg/054e1.svg" type="image/svg+xml"></object></td>
+        <td>士</td><td>し</td><td>samurai</td><td><object data="svg/058eb.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>仕</td><td>し</td><td>tjäna</td><td><object data="svg/04ed5.svg" type="image/svg+xml"></object></td>
+        <td>事</td><td>じ、こと、ごと</td><td>sak</td><td><object data="svg/04e8b.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>図</td><td>と、ず</td><td>teckning</td><td><object data="svg/056f3.svg" type="image/svg+xml"></object></td>
+        <td>官</td><td>かん</td><td>ämbetsman</td><td><object data="svg/05b98.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>館</td><td>かん</td><td>byggnad</td><td><object data="svg/09928.svg" type="image/svg+xml"></object></td>
+        <td>昔</td><td>むかし</td><td>urtida</td><td><object data="svg/06614.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>借</td><td>か</td><td>låna</td><td><object data="svg/0501f.svg" type="image/svg+xml"></object></td>
+        <td>代</td><td>だい、か</td><td>tidsålder,ersätta</td><td><object data="svg/04ee3.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>貸</td><td>か</td><td>låna ut</td><td><object data="svg/08cb8.svg" type="image/svg+xml"></object></td>
+        <td>地</td><td>ち</td><td>land</td><td><object data="svg/05730.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>世</td><td>せ</td><td>värld</td><td><object data="svg/04e16.svg" type="image/svg+xml"></object></td>
+        <td>界</td><td>かい</td><td>gräns</td><td><object data="svg/0754c.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>度</td><td>ど</td><td>gånger,grader</td><td><object data="svg/05ea6.svg" type="image/svg+xml"></object></td>
+        <td>回</td><td>かい、まわ</td><td>rotera</td><td><object data="svg/056de.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>用</td><td>よう</td><td>använda</td><td><object data="svg/07528.svg" type="image/svg+xml"></object></td>
+        <td>民</td><td>みん</td><td>folk</td><td><object data="svg/06c11.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>注</td><td>ちゅう</td><td>hälla</td><td><object data="svg/06ce8.svg" type="image/svg+xml"></object></td>
+        <td>意</td><td>い</td><td>sinne</td><td><object data="svg/0610f.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>頭</td><td>あたま</td><td>huvud</td><td><object data="svg/0982d.svg" type="image/svg+xml"></object></td>
+        <td>顔</td><td>かお</td><td>ansikte</td><td><object data="svg/09854.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>声</td><td>こえ</td><td>röst</td><td><object data="svg/058f0.svg" type="image/svg+xml"></object></td>
+        <td>特</td><td>とく</td><td>speciell</td><td><object data="svg/07279.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>別</td><td>べつ、わか</td><td>separera</td><td><object data="svg/05225.svg" type="image/svg+xml"></object></td>
+        <td>竹</td><td>たけ</td><td>bambu</td><td><object data="svg/07af9.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>合</td><td>あ</td><td>passa</td><td><object data="svg/05408.svg" type="image/svg+xml"></object></td>
+        <td>答</td><td>こた</td><td>svara</td><td><object data="svg/07b54.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>正</td><td>しょう、せい、ただ</td><td>rätt</td><td><object data="svg/06b63.svg" type="image/svg+xml"></object></td>
+        <td>同</td><td>おな</td><td>samma</td><td><object data="svg/0540c.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>計</td><td>けい</td><td>mäta</td><td><object data="svg/08a08.svg" type="image/svg+xml"></object></td>
+        <td>京</td><td>きょう</td><td>huvudstad</td><td><object data="svg/04eac.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>集</td><td>あつ</td><td>samla</td><td><object data="svg/096c6.svg" type="image/svg+xml"></object></td>
+        <td>不</td><td>ふ</td><td>icke</td><td><object data="svg/04e0d.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>便</td><td>べん</td><td>bekväm,post</td><td><object data="svg/04fbf.svg" type="image/svg+xml"></object></td>
+        <td>以</td><td>い</td><td>startpunkt</td><td><object data="svg/04ee5.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>場</td><td>じょう、ば</td><td>plats</td><td><object data="svg/05834.svg" type="image/svg+xml"></object></td>
+        <td>戸</td><td>と</td><td>dörr</td><td><object data="svg/06238.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>所</td><td>しょ、じょ、ところ、どころ</td><td>plats</td><td><object data="svg/06240.svg" type="image/svg+xml"></object></td>
+        <td>屋</td><td>おく、や</td><td>tak,affär</td><td><object data="svg/05c4b.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>堂</td><td>どう</td><td>hall</td><td><object data="svg/05802.svg" type="image/svg+xml"></object></td>
+        <td>都</td><td>と</td><td>metropolis</td><td><object data="svg/090fd.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>県</td><td>けん</td><td>prefektur</td><td><object data="svg/0770c.svg" type="image/svg+xml"></object></td>
+        <td>区</td><td>く</td><td>zon</td><td><object data="svg/0533a.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>池</td><td>ち、いけ</td><td>damm</td><td><object data="svg/06c60.svg" type="image/svg+xml"></object></td>
+        <td>発</td><td>はつ、ばつ</td><td>starta,avslöja</td><td><object data="svg/0767a.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>建</td><td>た</td><td>bygga</td><td><object data="svg/05efa.svg" type="image/svg+xml"></object></td>
+        <td>物</td><td>ぶつ、もの</td><td>sak</td><td><object data="svg/07269.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>品</td><td>しな</td><td>gods</td><td><object data="svg/054c1.svg" type="image/svg+xml"></object></td>
+        <td>旅</td><td>りょ</td><td>resa</td><td><object data="svg/065c5.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>通</td><td>とお、かよ</td><td>passera,pendla</td><td><object data="svg/0901a.svg" type="image/svg+xml"></object></td>
+        <td>進</td><td>すす</td><td>avancera</td><td><object data="svg/09032.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>一</td><td>いち、ひと</td><td>ett</td><td><object data="svg/04e00.svg" type="image/svg+xml"></object></td>
+        <td>時</td><td>とき、じ</td><td>klockan</td><td><object data="svg/06642.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>市</td><td>し</td><td>stad</td><td><object data="svg/05e02.svg" type="image/svg+xml"></object></td>
+        <td>理</td><td>り</td><td>logik</td><td><object data="svg/07406.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>切</td><td>せつ、き、きっ</td><td>skära</td><td><object data="svg/05207.svg" type="image/svg+xml"></object></td>
+        <td>月</td><td>がつ、げつ、つき</td><td>måne,månad</td><td><object data="svg/06708.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>上</td><td>うえ、あ</td><td>upp</td><td><object data="svg/04e0a.svg" type="image/svg+xml"></object></td>
+        <td>下</td><td>した、き</td><td>ner</td><td><object data="svg/04e0b.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>名</td><td>な</td><td>namn</td><td><object data="svg/0540d.svg" type="image/svg+xml"></object></td>
+        <td>明</td><td>みょう、あか、あ</td><td>ljust</td><td><object data="svg/0660e.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>小</td><td>しょう、ちい</td><td>liten</td><td><object data="svg/05c0f.svg" type="image/svg+xml"></object></td>
+        <td>外</td><td>そと</td><td>utanför</td><td><object data="svg/05916.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>化</td><td></td><td>ändring</td><td><object data="svg/05316.svg" type="image/svg+xml"></object></td>
+        <td>北</td><td>きた、ほく</td><td>norr</td><td><object data="svg/05317.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>気</td><td>き</td><td>energi</td><td><object data="svg/06c17.svg" type="image/svg+xml"></object></td>
+        <td>会</td><td>あ</td><td>möte</td><td><object data="svg/04f1a.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>生</td><td>う</td><td>födelse</td><td><object data="svg/0751f.svg" type="image/svg+xml"></object></td>
+        <td>映</td><td>えい</td><td>projicera</td><td><object data="svg/06620.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>大</td><td>おお、だい</td><td>stor</td><td><object data="svg/05927.svg" type="image/svg+xml"></object></td>
+        <td>本</td><td>き、もく</td><td>träd</td><td><object data="svg/0672c.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>中</td><td>なか、ちゅう、じゅう</td><td>i</td><td><object data="svg/04e2d.svg" type="image/svg+xml"></object></td>
+        <td>画</td><td>が</td><td>bild</td><td><object data="svg/0753b.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>社</td><td>しゃ、じゃ</td><td>helgedom</td><td><object data="svg/0793e.svg" type="image/svg+xml"></object></td>
+        <td>着</td><td>き、ぎ、つ</td><td>ha på sig,anlända</td><td><object data="svg/07740.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>手</td><td>て、しゅ</td><td>hand</td><td><object data="svg/0624b.svg" type="image/svg+xml"></object></td>
+        <td>何</td><td>なに、なん</td><td>vad?</td><td><object data="svg/04f55.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>作</td><td>つく、づく</td><td>göra</td><td><object data="svg/04f5c.svg" type="image/svg+xml"></object></td>
+        <td>入</td><td>はい</td><td>ingång</td><td><object data="svg/05165.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>学</td><td>がく</td><td>skola</td><td><object data="svg/05b66.svg" type="image/svg+xml"></object></td>
+        <td>火</td><td>ひ、か</td><td>eld</td><td><object data="svg/0706b.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>話</td><td>はな、はなし</td><td>prata</td><td><object data="svg/08a71.svg" type="image/svg+xml"></object></td>
+        <td>東</td><td>とう、ひがし</td><td>öst</td><td><object data="svg/06771.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>味</td><td>あじ</td><td>smak</td><td><object data="svg/05473.svg" type="image/svg+xml"></object></td>
+        <td>長</td><td>なが、ちょう</td><td>lång,chef</td><td><object data="svg/09577.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>銀</td><td>ぎん</td><td>silver</td><td><object data="svg/09280.svg" type="image/svg+xml"></object></td>
+        <td>見</td><td>み</td><td>se</td><td><object data="svg/0898b.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>間</td><td>かん、あいだ</td><td>mellan</td><td><object data="svg/09593.svg" type="image/svg+xml"></object></td>
+        <td>首</td><td>くび</td><td>nacke</td><td><object data="svg/09996.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>店</td><td>てん、みせ</td><td>affär</td><td><object data="svg/05e97.svg" type="image/svg+xml"></object></td>
+        <td>語</td><td>ご</td><td>språk</td><td><object data="svg/08a9e.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>買</td><td>か</td><td>köpa</td><td><object data="svg/08cb7.svg" type="image/svg+xml"></object></td>
+        <td>人</td><td>ひと</td><td>människa</td><td><object data="svg/04eba.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>今</td><td>いま</td><td>nu</td><td><object data="svg/04eca.svg" type="image/svg+xml"></object></td>
+        <td>車</td><td>くるま、しゃ</td><td>fordon</td><td><object data="svg/08eca.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>野</td><td>や、の</td><td>fält</td><td><object data="svg/091ce.svg" type="image/svg+xml"></object></td>
+        <td>食</td><td>た、しょく</td><td>äta</td><td><object data="svg/098df.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>転</td><td>てん</td><td>rulla</td><td><object data="svg/08ee2.svg" type="image/svg+xml"></object></td>
+        <td>工</td><td>こう</td><td>hantverk</td><td><object data="svg/05de5.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>自</td><td>じ</td><td>själv</td><td><object data="svg/081ea.svg" type="image/svg+xml"></object></td>
+        <td>台</td><td>たい</td><td>stånd</td><td><object data="svg/053f0.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>売</td><td>う</td><td>sälja</td><td><object data="svg/058f2.svg" type="image/svg+xml"></object></td>
+        <td>飲</td><td>の</td><td>dricka</td><td><object data="svg/098f2.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>音</td><td>おん、おと</td><td>ljud</td><td><object data="svg/097f3.svg" type="image/svg+xml"></object></td>
+        <td>書</td><td>か</td><td>skriva</td><td><object data="svg/066f8.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>出</td><td>だ、で</td><td>ut</td><td><object data="svg/051fa.svg" type="image/svg+xml"></object></td>
+        <td>電</td><td>でん</td><td>el</td><td><object data="svg/096fb.svg" type="image/svg+xml"></object></td>
+    </tr>
+    <tr>
+        <td>午</td><td>ご</td><td>middag</td><td><object data="svg/05348.svg" type="image/svg+xml"></object></td>
+        <td>行</td><td>い</td><td>åka</td><td><object data="svg/0884c.svg" type="image/svg+xml"></object></td>
+    </tr>
+</table>
+<footer>
+    <p>I would like to thank the Kanji VG project (http://kanjivg.tagaini.net/). I am not associated with Kanji VG, just a user.
+        The kanji svg files (i.e. the kanji drawings with stroke order) are used by permission under the following licens:</p>
+    <h4>Licence</h4>
+    <p>KanjiVG is copyright © 2009-2015 Ulrich Apel and released under the Creative Commons Attribution-Share Alike 3.0 license.<br>
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/">https://creativecommons.org/licenses/by-sa/3.0/</a></p>
+</footer>
+</body>
+</html>
