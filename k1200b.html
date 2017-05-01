@@ -211,7 +211,8 @@ function clearCanvas() {
     ctx.beginPath();
 }
 function updateKanji() {
-    document.getElementById('question').innerText=words[kanji][0];
+    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+    document.getElementById('question').innerText=words[kanji][0] +' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
     document.getElementById('answer').innerText=' ';
     clearCanvas();
     isShowing = false;
