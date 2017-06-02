@@ -1,0 +1,34 @@
+body {
+    background: #eeefff; // url("gota.jpg") no-repeat;
+    background-size: 1270px, 275px;
+}
+h1, h2, p, td {
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: normal;
+}
+
+#drawing {
+    border: 2px solid #047;
+}
+
+#holder {
+    position: relative;
+}
+
+td {
+    font-size: large;
+    align: bottom;
+}
+
+.smaller {
+    font-size: medium;
+}
+
+.ultra-large {
+    font-size: 700%;
+    margin-top: -400px;
+    margin-left: 0px;
+    margin-bottom: 50px;
+    height: 400px;
+    color: cornflowerblue;
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Kanji för jp1200 skriftsystem 1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="g1200b.css">
 </head>
 <body onload="init();">
 <p id="question"></p>
@@ -160,16 +160,16 @@ var words = [
     ['förflytta(どう)','動', ''],
     ['sak(じ)','事', ''],
     ['vän(ゆう)','友', ''],
-    ['(よ)','予', ''],
+    ['avancera(よ)','予', ''],
     ['vila(きゅう)','休', ''],
-    ['(けん)','験', ''],
-    ['(ぎょう)','業', ''],
-    ['(りょう)','料', ''],
+    ['undersöka(けん)','験', ''],
+    ['affärer(ぎょう)','業', ''],
+    ['ingrediens(りょう)','料', ''],
     ['födelse(う,せい)','生', ''],
     ['inlärning(しゅう)','習', ''],
     ['repetition(かい)','回', ''],
-    ['(はっ)','発', ''],
-    ['(しき)','式', ''],
+    ['start(はっ)','発', ''],
+    ['ceremoni(しき)','式', ''],
     ['mellan(かん、あいだ)','間', ''],
     ['stå(た)','立', ''],
     ['stad(し)','市', ''],
@@ -184,7 +184,7 @@ var words = [
     ['stor(おお、だい)','大', ''],
     ['del(ぶん)','分', ''],
     ['själv(じ)','自', ''],
-    ['(じゅう)','重', ''],
+    ['tung(じゅう)','重', ''],
     ['förnuft(り)','理', ''],
     ['bekväm(べん)','便', ''],
     ['uppgift(よう)','用', ''],
@@ -200,44 +200,44 @@ var words = [
     ['mening(ぶん)','文', ''],
     ['riktning(ほう)','方', ''],
     ['öst(とう、ひがし)','東', ''],
-    ['(しゅ)','主', ''],
-    ['(みん)','民', ''],
+    ['main(しゅ)','主', ''],
+    ['folk(みん)','民', ''],
     ['helgedom(しゃ、じゃ)','社', ''],
     ['möte(かい)','会', ''],
-    ['(し)','思', ''],
+    ['tänka(し)','思', ''],
     ['jord(ち)','地', ''],
     ['vatten(すい)','水', ''],
     ['mun(ぐち)','口', ''],
-    ['(みぎ)','右', ''],
-    ['(こと)','言', ''],
+    ['höger(みぎ)','右', ''],
+    ['säga(こと)','言', ''],
     ['skriva(か)','書', ''],
     ['färg(いろ)','色', ''],
     ['kraft(き)','気', ''],
     ['mörk(あん)','暗', ''],
-    ['(もの,しゃ)','者', ''],
+    ['person(もの,しゃ)','者', ''],
     ['ingång(はい)','入', ''],
-    ['(つう)','通', ''],
+    ['pendla(つう)','通', ''],
     ['familj(しん)','親', ''],
     ['nästa(らい)','来', ''],
     ['pappa(ふ)','父', ''],
     ['mamma(ぼ)','母', ''],
     ['förra(せん)','先', ''],
-    ['(きょう)','教', ''],
+    ['lära ut(きょう)','教', ''],
     ['kropp(たい)','体', ''],
     ['man(だん)','男', ''],
-    ['(べつ)','別', ''],
-    ['(たい)','待', ''],
+    ['separera(べつ)','別', ''],
+    ['vänta(たい)','待', ''],
     ['ut(だ、で)','出', ''],
     ['bakom(ご)','後', ''],
     ['kort(きん)','近', ''],
-    ['(こう)','高', ''],
-    ['(てい)','低', ''],
-    ['(しん)','新', ''],
-    ['(しゅう)','終', ''],
+    ['hög(こう)','高', ''],
+    ['låg(てい)','低', ''],
+    ['ny(しん)','新', ''],
+    ['sluta(しゅう)','終', ''],
     ['el(でん)','電', ''],
     ['fordon(くるま、しゃ)','車', ''],
     ['2(に)','二', ''],
-    ['(もく,め)','目', ''],
+    ['öga(もく,め)','目', ''],
     ['5()','五', ''],
     ['10(し)','十', ''],
     ['svag(じゃく)','弱', ''],
@@ -448,7 +448,7 @@ jämföra streckordning och utseende med facit.</p>
     <li>FÖREGÅENDE: Välj föregående tecken</li>
     <li>RENSA: Töm ritytan ifall man vill börja om att rita</li>
 </ul>
-<table>
+<table id="table">
 </table>
 <footer>
     <p>I would like to thank the Kanji VG project (http://kanjivg.tagaini.net/). I am not associated with Kanji VG, just a user.
@@ -457,5 +457,27 @@ jämföra streckordning och utseende med facit.</p>
     <p>KanjiVG is copyright © 2009-2015 Ulrich Apel and released under the Creative Commons Attribution-Share Alike 3.0 license.<br>
         <a href="https://creativecommons.org/licenses/by-sa/3.0/">https://creativecommons.org/licenses/by-sa/3.0/</a></p>
 </footer>
+<script>
+    var table = document.getElementById('table');
+    for (var i = 0; i < words.length; i++){
+        var tr = document.createElement('tr');
+
+        var td0 = document.createElement('td');
+        var td1 = document.createElement('td');
+        var td2 = document.createElement('td');
+
+        var text1 = document.createTextNode(words[i][0]);
+        var text2 = document.createTextNode(words[i][2]);
+        var hex = words[i][1].toString().charCodeAt(0).toString(16);
+        td0.innerHTML = '<img width = "80" src="svg/0' + hex + '.svg"/>';
+        td1.appendChild(text1);
+        td2.appendChild(text2);
+        tr.appendChild(td0);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+        table.appendChild(tr);
+    }
+</script>
 </body>
 </html>
