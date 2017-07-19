@@ -19,28 +19,56 @@ var words = [
     ['entusiastisk','熱心', '熱心、ねっしん:entusiastisk'],
     ['absorberas','熱中する', '熱中する、ねっちゅうする:absorberas'],
     ['frysa(つめ、ひ、さ)','冷', '冷たい、つめたい:kall・冷える、ひえる:bli kall・冷やす、ひやす:kyla ner・冷ます、さます:svalna'],
-    ['frysa','冷い', '冷たい、つめたい:kall'],
+    ['kall','冷い', '冷たい、つめたい:kall'],
     ['bli kall','冷える', '冷える、ひえる:bli kall'],
     ['kyla ner','冷やす', '冷やす、ひやす:kyla ner'],
     ['svalna','冷ます', '冷ます、さます:svalna'],
     ['söt(あま)','甘', '甘い、あまい:söt・甘やがす、あまやがす:bli skämt'],
+    ['söt','甘い', '甘い、あまい:söt'],
+    ['bli skämt','甘やがす', '甘やがす、あまやがす:bli skämt'],
     ['smutsig(きたな、よご)','汚', '汚い、きたない:smutsig・汚れる、よごれる:bli smutsig・汚す、よごす:smutsa ner'],
+    ['smutsig','汚い', '汚い、きたない:smutsig'],
+    ['bli smutsig','汚れる', '汚れる、よごれる:bli smutsig'],
+    ['smutsa ner','汚す', '汚す、よごす:smutsa ner'],
     ['frukt(*くだ)','果', '果物、くだもの:frukt'],
     ['ägg(たまご)','卵', '卵、たまご:ägg'],
     ['tallrik(さら)','皿', 'お皿、おさら:tallrik'],
     ['alkohol(しゅ、さけ、さか)','酒', 'お酒、おさけ:alkohol・酒屋、さかや:spritbutik・日本酒、にほんしゅ:sake・飲酒運転、いんしゅうんてん:rattfylleri'],
+    ['alkohol','お酒', 'お酒、おさけ:alkohol'],
+    ['spritbutik','酒屋', '酒屋、さかや:spritbutik'],
+    ['sake','日本酒', '日本酒、にほんしゅ:sake'],
+    ['rattfylleri','飲酒運転','飲酒運転、いんしゅうんてん:rattfylleri'],
     ['salt(しお)','塩', '塩、しお:salt'],
     ['fästa(つ、づ)','付', '付き合う、つきあう:dejta・片付ける、かたづける:snygga upp・付ける、つける:fästa・付く、つく:fästa・日付、ひづけ:träff'],
+    ['dejta','付き合う', '付き合う、つきあう:dejta'],
+    ['snygga upp','片付ける', '片付ける、かたづける:snygga upp'],
+    ['fästa','付ける', '付ける、つける:fästa'],
+    ['fästa','付く', '付く、つく:fästa'],
+    ['träff','日付', '日付、ひづけ:träff'],
     ['ena sidan(かた)','片', '片道、かたみち:enkelriktad'],
-    ['bränna(や)','焼く', '焼く、やく:bränna, baka・焼ける、やける:bli bränd,bli bakad'],
+    ['enkelriktad','片道', '片道、かたみち:enkelriktad'],
+    ['bränna(や)','焼', '焼く、やく:bränna, baka・焼ける、やける:bli bränd,bli bakad'],
+    ['bränna','焼く', '焼く、やく:bränna, baka'],
+    ['bränna','焼ける', '焼ける、やける:bli bränd,bli bakad'],
     ['slå av,försvinna(しょう、け、き)','消', '消す、けす:slå av・消える、きえる:något slås av, försvinna・消化する、しょうかする:smälta'],
-    ['hård(かた)','固', '固い、かたい:hård,fast・固まる、かたまる:härda'],
+    ['slå av','消す', '消す、けす:slå av'],
+    ['något slås av, försvinna','消える', '消える、きえる:något slås av, försvinna'],
+    ['slå av,försvinna','消化する', '消化する、しょうかする:smälta'],
+    ['hård(かた)','固い', '固い、かたい:hård,fast・固まる、かたまる:härda'],
     ['individ(こ)','個', '一個、いっこ:en (liten sak)・個人、こじん:individ'],
+    ['en (liten sak)','一個', '一個、いっこ:en (liten sak)'],
+    ['individ','個人', '個人、こじん:individ'],
     ['skratta(わら、え)','笑', '笑う、わらう:skratta・笑顔、えかお:le'],
-    ['gråta(な)','泣', '泣く、なく:gråta'],
-    ['ilska(おこ)','怒', '怒る、おこる:bli arg'],
+    ['skratta','笑う', '笑う、わらう:skratta'],
+    ['skratta','笑顔', '笑顔、えかお:le'],
+    ['gråta(な)','泣く', '泣く、なく:gråta'],
+    ['ilska(おこ)(bli arg)','怒る', '怒る、おこる:bli arg'],
     ['glad(こう、しあわ)','幸', '幸せ、しあわせ:glad・不幸、ふこう:otur'],
+    ['glad','幸せ', '幸せ、しあわせ:glad'],
+    ['otur','不幸', '不幸、ふこう:otur'],
     ['ledsen(かな)','悲', '悲しい、かなしい:ledsen・悲しむ、かなしむ:sörja'],
+    ['ledsen','悲しい', '悲しい、かなしい:ledsen'],
+    ['ledsen','悲しむ', '悲しむ、かなしむ:sörja'],
     ['lida(にがい)','苦', '苦い、にがい:bitter・苦手、にがて:dålig på・苦しい、くるしい:smärtsam・苦しむ、くるしむ:lida・苦痛、くつう:smärta'],
     ['smärta(つう、いた)','痛', '痛い、いたい:smärtsam・痛み、いたみ:smärta・頭痛、ずつう:huvudvärk'],
     ['skam(は)','恥', '恥ずかしい、はずかしい:skämmas'],
@@ -299,7 +327,7 @@ function getRandomInt() {
 }
 function clearCanvas() {
     var ctx = document.getElementById('drawing').getContext('2d');
-    ctx.clearRect(0, 0, 400,400);
+    ctx.clearRect(0, 0, 1200,300);
     ctx.beginPath();
 }
 function updateKanji() {
@@ -308,9 +336,10 @@ function updateKanji() {
     clearCanvas();
     isShowing = show;
     if (isShowing) {
-        var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
-        document.getElementById('answer').innerHTML = '<img width = "400" src="svg/0' + hex + '.svg"/>';
-        document.getElementById('usage').innerText='* ' + words[kanji][2];
+        typeKanji();
+//        var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+//        document.getElementById('answer').innerHTML = '<img width = "300" src="svg/0' + hex + '.svg"/>';
+//        document.getElementById('usage').innerText='* ' + words[kanji][2];
     } else {
         document.getElementById('answer').innerText=' ';
         document.getElementById('usage').innerText='* ';
@@ -329,21 +358,24 @@ function prevKanji() {
     updateKanji();
 }
 
+function typeKanji() {
+    isShowing = true;
+    document.getElementById('usage').innerText = '* ' + words[kanji][2];
+    var len = words[kanji][1].toString().length;
+    var s = "";
+    for (var i = 0; i < len; i++) {
+        var hex = words[kanji][1].toString().charCodeAt(i).toString(16);
+        s += '<img class = "svg" width = "300" src="svg/0' + hex + '.svg"/>'
+    }
+    document.getElementById('answer').innerHTML = s;
+}
 function showKanji() {
     if (isShowing) {
         isShowing = false;
         document.getElementById('answer').innerText=' ';
         document.getElementById('usage').innerText='* ';
     } else {
-        isShowing = true;
-        document.getElementById('usage').innerText='* ' + words[kanji][2];
-        var len = words[kanji][1].toString().length;
-        var s = "";
-        for (var i = 0 ; i < len; i++) {
-            var hex = words[kanji][1].toString().charCodeAt(i).toString(16);
-            s += '<img width = "300" src="svg/0' + hex + '.svg"/>'
-        }
-        document.getElementById('answer').innerHTML = s;
+        typeKanji();
     }
 }
 
@@ -483,11 +515,11 @@ jämföra streckordning och utseende med facit.</p>
 
         var text1 = document.createTextNode(words[i][0]);
         var text2 = document.createTextNode(words[i][2]);
-        var hex = words[i][1].toString().charCodeAt(0).toString(16);
-        td0.innerHTML = '<img width = "80" src="svg/0' + hex + '.svg"/>';
+//        var hex = words[i][1].toString().charCodeAt(0).toString(16);
+//        td0.innerHTML = '<img width = "80" src="svg/0' + hex + '.svg"/>';
         td1.appendChild(text1);
         td2.appendChild(text2);
-        tr.appendChild(td0);
+//        tr.appendChild(td0);
         tr.appendChild(td1);
         tr.appendChild(td2);
 

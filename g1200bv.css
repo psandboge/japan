@@ -28,7 +28,13 @@ td {
     font-size: 500%;
     margin-top: -300px;
     margin-left: 0px;
+    margin-right: 30px;
     margin-bottom: 50px;
     height: 300px;
     color: cornflowerblue;
+}
+
+.svg {
+    margin-right: -50px;
+    -webkit-text-stroke-color: darkred;
 }
