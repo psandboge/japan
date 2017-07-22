@@ -535,6 +535,7 @@ var words = [
 //    ['middag(ご)','午', ''],
 //    ['åka(い)','行', ''],
 ];
+var wordCount = words.length;
 var kanji = 0;
 var isShowing = false;
 var show = false;
@@ -547,8 +548,7 @@ function toggleShow() {
     }
 }
 function getRandomInt() {
-    max = words.length;
-    return Math.floor(Math.random() * (max));
+    return Math.floor(Math.random() * (wordCount));
 }
 function clearCanvas() {
     var ctx = document.getElementById('drawing').getContext('2d');
@@ -557,7 +557,20 @@ function clearCanvas() {
 }
 function updateKanji() {
     var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
-    document.getElementById('question').innerText=words[kanji][0] +' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
+    var info = words[kanji][0];
+    if (storageAvailable()) {
+        info += " " + kanji + "/" + localStorage.getItem("hist").length;
+        var ctr = localStorage.getItem("k2bctr" + kanji);
+        var cer = localStorage.getItem("k2bcer" + kanji);
+        var cts = localStorage.getItem("k2bcts" + kanji);
+        if (cts) {
+            info += " Tries: " + ctr;
+            info += " Errors: " + cer;
+            info += " Last try: " + cts;
+        }
+    }
+    // +' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
+    document.getElementById('question').innerText=info;
     clearCanvas();
     isShowing = show;
     if (isShowing) {
@@ -575,11 +588,11 @@ function newKanji() {
     updateKanji();
 }
 function nextKanji() {
-    kanji = (kanji + 1) % words.length;
+    kanji = (kanji + 1) % wordCount;
     updateKanji();
 }
 function prevKanji() {
-    kanji = (kanji - 1 + words.length) % words.length;
+    kanji = (kanji - 1 + wordCount) % wordCount;
     updateKanji();
 }
 
@@ -593,7 +606,82 @@ function typeKanji() {
         s += '<img class = "svg" width = "280" src="svg/0' + hex + '.svg"/>'
     }
     document.getElementById('answer').innerHTML = s;
+    if (storageAvailable()) {
+        var ctr = Number(localStorage.getItem("k2bctr" + kanji));
+        var cer = Number(localStorage.getItem("k2bcer" + kanji));
+        var cts = localStorage.getItem("k2bcts" + kanji);
+        if (!cts) {
+            localStorage.setItem("k2bctr" + kanji, 1);
+            localStorage.setItem("k2bcer" + kanji, 0);
+            localStorage.setItem("k2bcts" + kanji, Date.now());
+        } else {
+            localStorage.setItem("k2bctr" + kanji, ctr + 1);
+            localStorage.setItem("k2bcer" + kanji, cer);
+            localStorage.setItem("k2bcts" + kanji, Date.now());
+        }
+    }
 }
+
+function wrongAnswer() {
+    if (storageAvailable()) {
+        var ctr = Number(localStorage.getItem("k2bctr" + kanji));
+        var cer = Number(localStorage.getItem("k2bcer" + kanji));
+        var cts = localStorage.getItem("k2bcts" + kanji);
+        if (!cts) {
+            localStorage.setItem("k2bctr" + kanji, 1);
+            localStorage.setItem("k2bcer" + kanji, 1);
+            localStorage.setItem("k2bcts" + kanji, Date.now());
+        } else {
+            localStorage.setItem("k2bcer" + kanji, cer + 1);
+            localStorage.setItem("k2bcts" + kanji, Date.now());
+        }
+    }
+}
+
+function bestQuestion() {
+    var newKanji = null;
+    var wrongAnswer = null;
+    var wrongAnswerCnt = null;
+    var oldestAnswer = null;
+    var oldestTime = null;
+    var wrongTime = null;
+    for (var x = 0; x < wordCount; x++) {
+        var ctr = Number(localStorage.getItem("k2bctr" + x));
+        var cer = Number(localStorage.getItem("k2bcer" + x));
+        var cts = Number(localStorage.getItem("k2bcts" + x));
+        if (cts) {
+            if (cer >= 1) {
+                if (wrongTime === null || wrongTime > cts) {
+                    wrongTime = cts;
+                    wrongAnswer = x;
+                    wrongAnswerCnt = cer;
+                }
+            } else {
+                if (oldestTime === null || oldestTime > cts) {
+                    oldestTime = cts;
+                    oldestAnswer = x;
+                }
+            }
+        } else {
+            if (newKanji === null) {
+                newKanji = x;
+            }
+        }
+    }
+    var nextKanjiType = Math.floor(Math.random() * (100));
+    if (nextKanjiType < 50 && wrongAnswer !== null) {
+        localStorage.setItem("k2bcer" + wrongAnswer, wrongAnswerCnt - 1);
+        kanji = wrongAnswer;
+    } else if (nextKanjiType < 90 && oldestAnswer !== null) {
+        kanji = oldestAnswer;
+    } else if (newKanji !== null) {
+        kanji = newKanji;
+    } else {
+        kanji = 0;
+    }
+    updateKanji();
+}
+
 function showKanji() {
     if (isShowing) {
         isShowing = false;
@@ -603,8 +691,29 @@ function showKanji() {
         typeKanji();
     }
 }
+function storageAvailable() {
+    try {
+        var x = '__x';
+        localStorage.setItem(x, x);
+        localStorage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return false;
+    }
+}
+
+//function initDb() {
+//    if (storageAvailable()) {
+//       var s = localStorage.getItem("hist");
+//       if (!s || s.length !== words.length) {
+//           localStorage.setItem("hist", new Array(words.length));
+//       }
+//    }
+//}
 
 document.getElementById('question').innerText=words[0][0];
+//initDb();
 
 var myPen;
 function init() {
@@ -707,6 +816,8 @@ function handleMouseEvent(e) {
 <button onclick="prevKanji();">&lt;</button>
 <button onclick="nextKanji();">&gt;</button>
 <button onclick="clearCanvas();">RENSA</button>
+<button onclick="wrongAnswer();">FEL</button>
+<button onclick="bestQuestion();">Q</button>
 <h2>Instruktioner</h2>
 <p>JP1200 skriftsystem 2</p>
 <p>Observera att "hjärta" och framåt är repetition av tecken som inte är nya men ingår i glosorna.</p>
@@ -731,7 +842,7 @@ jämföra streckordning och utseende med facit.</p>
 </footer>
 <script>
     var table = document.getElementById('table');
-    for (var i = 0; i < words.length; i++){
+    for (var i = 0; i < wordCount; i++){
         var tr = document.createElement('tr');
 
         var td0 = document.createElement('td');
