@@ -559,7 +559,7 @@ function updateKanji() {
     var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
     var info = words[kanji][0];
     if (storageAvailable()) {
-        info += " " + kanji + "/" + localStorage.getItem("hist").length;
+        info += " " + kanji + "/" + words.length;
         var ctr = localStorage.getItem("k2bctr" + kanji);
         var cer = localStorage.getItem("k2bcer" + kanji);
         var cts = localStorage.getItem("k2bcts" + kanji);
