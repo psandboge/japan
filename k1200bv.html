@@ -47,8 +47,8 @@ var words = [
     ['träff','日付', '日付、ひづけ:träff'],
     ['ena sidan(かた)(enkelriktad)','片道', '片道、かたみち:enkelriktad'],
     ['bränna(や)','焼', '焼く、やく:bränna, baka・焼ける、やける:bli bränd,bli bakad'],
-    ['bränna','焼く', '焼く、やく:bränna, baka'],
-    ['bränna','焼ける', '焼ける、やける:bli bränd,bli bakad'],
+    ['bränna, baka','焼く', '焼く、やく:bränna, baka'],
+    ['bli bränd,bli bakad','焼ける', '焼ける、やける:bli bränd,bli bakad'],
     ['slå av,försvinna(しょう、け、き)','消', '消す、けす:slå av・消える、きえる:något slås av, försvinna・消化する、しょうかする:smälta'],
     ['slå av','消す', '消す、けす:slå av'],
     ['något slås av, försvinna','消える', '消える、きえる:något slås av, försvinna'],
@@ -669,13 +669,13 @@ function bestQuestion() {
         }
     }
     var nextKanjiType = Math.floor(Math.random() * (100));
-    if (nextKanjiType < 50 && wrongAnswer !== null) {
+    if (nextKanjiType < 20 && newKanji !== null) {
+        kanji = newKanji;
+    } else if (nextKanjiType < 30 && wrongAnswer !== null) {
         localStorage.setItem("k2bcer" + wrongAnswer, wrongAnswerCnt - 1);
         kanji = wrongAnswer;
-    } else if (nextKanjiType < 90 && oldestAnswer !== null) {
+    } else if (oldestAnswer !== null) {
         kanji = oldestAnswer;
-    } else if (newKanji !== null) {
-        kanji = newKanji;
     } else {
         kanji = 0;
     }
