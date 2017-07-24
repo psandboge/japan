@@ -15,7 +15,7 @@ var words = [
     ['cirkel','丸', '丸、まる:cirkel'],
     ['hetta(ねつ、ねっ、あつ)','熱', '熱い、あつい:hett・熱、あつ:feber・熱心、ねっしん:entusiastisk・熱中する、ねっちゅうする:absorberas'],
     ['hett','熱い', '熱い、あつい:hett'],
-    ['feber','熱', '熱、あつ:feber'],
+    ['feber','熱', '熱、ねつ:feber'],
     ['entusiastisk','熱心', '熱心、ねっしん:entusiastisk'],
     ['absorberas','熱中する', '熱中する、ねっちゅうする:absorberas'],
     ['frysa(つめ、ひ、さ)','冷', '冷たい、つめたい:kall・冷える、ひえる:bli kall・冷やす、ひやす:kyla ner・冷ます、さます:svalna'],
@@ -506,34 +506,7 @@ var words = [
     ['svag(じゃく)','弱', ''],
     ['3()','三', ''],
     ['tid(とき)','時', ''],
-    ['lite(しょう)','少', ''],
-//    ['projicera(えい)','映', ''],
-//    ['träd(き、もく)','本', ''],
-//    ['i(なか、ちゅう、じゅう)','中', ''],
-//    ['bild(が)','画', ''],
-//    ['ha på sig,anlända(き、ぎ、つ)','着', ''],
-//    ['hand(て、しゅ)','手', ''],
-//    ['vad?(なに、なん)','何', ''],
-//    ['göra(つく、づく)','作', ''],
-//    ['eld(ひ、か)','火', ''],
-//    ['prata(はな、はなし)','話', ''],
-//    ['smak(あじ)','味', ''],
-//    ['silver(ぎん)','銀', ''],
-//    ['se(み)','見', ''],
-//    ['nacke(くび)','首', ''],
-//    ['affär(てん、みせ)','店', ''],
-//    ['språk(ご)','語', ''],
-//    ['köpa(か)','買', ''],
-//    ['människa(ひと)','人', ''],
-//    ['nu(いま)','今', ''],
-//    ['fält(や、の)','野', ''],
-//    ['rulla(てん)','転', ''],
-//    ['stånd(たい)','台', ''],
-//    ['sälja(う)','売', ''],
-//    ['dricka(の)','飲', ''],
-//    ['ljud(おん、おと)','音', ''],
-//    ['middag(ご)','午', ''],
-//    ['åka(い)','行', ''],
+    ['lite(しょう)','少', '']
 ];
 var wordCount = words.length;
 var kanji = 0;
@@ -556,7 +529,7 @@ function clearCanvas() {
     ctx.beginPath();
 }
 function updateKanji() {
-    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+//    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
     var info = words[kanji][0];
     if (storageAvailable()) {
         info += " " + kanji + "/" + words.length;
@@ -575,9 +548,6 @@ function updateKanji() {
     isShowing = show;
     if (isShowing) {
         typeKanji();
-//        var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
-//        document.getElementById('answer').innerHTML = '<img width = "300" src="svg/0' + hex + '.svg"/>';
-//        document.getElementById('usage').innerText='* ' + words[kanji][2];
     } else {
         document.getElementById('answer').innerText=' ';
         document.getElementById('usage').innerText='* ';
@@ -624,7 +594,6 @@ function typeKanji() {
 
 function wrongAnswer() {
     if (storageAvailable()) {
-        var ctr = Number(localStorage.getItem("k2bctr" + kanji));
         var cer = Number(localStorage.getItem("k2bcer" + kanji));
         var cts = localStorage.getItem("k2bcts" + kanji);
         if (!cts) {
@@ -646,7 +615,7 @@ function bestQuestion() {
     var oldestTime = null;
     var wrongTime = null;
     for (var x = 0; x < wordCount; x++) {
-        var ctr = Number(localStorage.getItem("k2bctr" + x));
+//        var ctr = Number(localStorage.getItem("k2bctr" + x));
         var cer = Number(localStorage.getItem("k2bcer" + x));
         var cts = Number(localStorage.getItem("k2bcts" + x));
         if (cts) {
@@ -656,11 +625,10 @@ function bestQuestion() {
                     wrongAnswer = x;
                     wrongAnswerCnt = cer;
                 }
-            } else {
-                if (oldestTime === null || oldestTime > cts) {
-                    oldestTime = cts;
-                    oldestAnswer = x;
-                }
+            }
+            if (oldestTime === null || oldestTime > cts) {
+                oldestTime = cts;
+                oldestAnswer = x;
             }
         } else {
             if (newKanji === null) {
@@ -703,17 +671,7 @@ function storageAvailable() {
     }
 }
 
-//function initDb() {
-//    if (storageAvailable()) {
-//       var s = localStorage.getItem("hist");
-//       if (!s || s.length !== words.length) {
-//           localStorage.setItem("hist", new Array(words.length));
-//       }
-//    }
-//}
-
 document.getElementById('question').innerText=words[0][0];
-//initDb();
 
 var myPen;
 function init() {
