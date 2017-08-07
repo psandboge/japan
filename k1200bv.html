@@ -68,7 +68,7 @@ var words = [
     ['ledsen(かな)','悲', '悲しい、かなしい:ledsen・悲しむ、かなしむ:sörja'],
     ['ledsen','悲しい', '悲しい、かなしい:ledsen'],
     ['sörja','悲しむ', '悲しむ、かなしむ:sörja'],
-    ['lida(にがい)','苦', '苦い、にがい:bitter・苦手、にがて:dålig på・苦しい、くるしい:smärtsam・苦しむ、くるしむ:lida・苦痛、くつう:smärta'],
+    ['lida(にが、く、くる)','苦', '苦い、にがい:bitter・苦手、にがて:dålig på・苦しい、くるしい:smärtsam・苦しむ、くるしむ:lida・苦痛、くつう:smärta'],
     ['bitter','苦い', '苦い、にがい:bitter'],
     ['dålig på','苦手', '苦手、にがて:dålig på'],
     ['smärtsam','苦しい', '苦しい、くるしい:smärtsam'],
@@ -231,7 +231,7 @@ var words = [
     ['lag, metod(ほう、ぽう)','法', '文法、ぶんぽう:grammatik・方法、ほうほう:metod'],
     ['grammatik','文法', '文法、ぶんぽう:grammatik'],
     ['metod','方法', '方法、ほうほう:metod'],
-    ['reglering(りつ)+','法律', '法律、ほうりつ:lag'],
+    ['reglering(りつ)(lag)','法律', '法律、ほうりつ:lag'],
     ['tillfälle(さい)','際', '国際、こくさい:internationell・国際化、こくさいか:internationalisering・~際、~さい:när..'],
     ['internationell','国際', '国際、こくさい:internationell'],
     ['internationalisering','国際化','国際化、こくさいか:internationalisering'],
@@ -348,7 +348,7 @@ var words = [
     ['ta ut','取り出す', '取り出す、とりだす:ta ut'],
     ['upphäva','取り消す', '取り消す、とりけす:upphäva'],
     ['yttersta(さい、もっと)','最', '最初、さいしょ:först・最後、さいご:sist・最近、さいきん:nyligen・最高、さいこう:bäst・最低、さいてい:lägst・最新、さいしん:senast・最も、もっとも:mest・最終電車、さいしゅうでんしゃ:sista tåget'],
-    ['först','最初', '最初、さいしょ:först・最後、さいご:sist・最近、さいきん:nyligen・最高、さいこう:bäst・最低、さいてい:lägst・最新、さいしん:senast・最も、もっとも:mest・最終電車、さいしゅうでんしゃ:sista tåget'],
+    ['först','最初', '最初、さいしょ:först'],
     ['sist','最後', '最後、さいご:sist'],
     ['nyligen','最近', '最近、さいきん:nyligen'],
     ['bäst','最高', '最高、さいこう:bäst'],
@@ -383,7 +383,7 @@ var words = [
     ['nummer(ごう)','号', '記号、きごう:symbol・一号車、いちごうしゃ:bil nr 1'],
     ['symbol','記号', '記号、きごう:symbol'],
     ['bil nr 1','一号車', '一号車、いちごうしゃ:bil nr 1'],
-    ['dubbel(ばい)+','三倍', '三倍、さんばい:3 ggr...'],
+    ['dubbel(ばい)(3 ggr)','三倍', '三倍、さんばい:3 ggr...'],
     ['nästa(じ、つぎ)','次', '次、つぎ:nästa・次々、つぎつぎ:en efter en・目次、もくじ:innehållsförteckning'],
     ['nästa','次', '次、つぎ:nästa'],
     ['en efter en','次々', '次々、つぎつぎ:en efter en'],
@@ -809,11 +809,18 @@ jämföra streckordning och utseende med facit.</p>
 
         var text1 = document.createTextNode(words[i][0]);
         var text2 = document.createTextNode(words[i][2]);
-//        var hex = words[i][1].toString().charCodeAt(0).toString(16);
-//        td0.innerHTML = '<img width = "80" src="svg/0' + hex + '.svg"/>';
+        if ((words[i][0]).indexOf('(') > 0) {
+            var hex = words[i][1].toString().charCodeAt(0).toString(16);
+            var word = words[i][1];
+            if (word === 'お皿' || word === '残念' || word === '生徒' || word === '法律' || word === '政党' || word === '右側'
+                || word === '結婚する' || word === '一枚' || word === '一冊' || word === '一億' || word === '三倍') {
+                hex = words[i][1].toString().charCodeAt(1).toString(16);
+            }
+            td0.innerHTML = '<img width = "80" src="svg/0' + hex + '.svg"/>';
+        }
         td1.appendChild(text1);
         td2.appendChild(text2);
-//        tr.appendChild(td0);
+        tr.appendChild(td0);
         tr.appendChild(td1);
         tr.appendChild(td2);
 
