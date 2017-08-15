@@ -56,7 +56,7 @@ var words = [
     ['hård(かた)+','固い', '固い、かたい:hård,fast・固まる、かたまる:härda'],
     ['härda','かたまる', '固い、かたい:hård,fast・固まる、かたまる:härda'],
     ['individ(こ)','個', '一個、いっこ:en (liten sak)・個人、こじん:individ'],
-    ['en (liten sak)','一個', '一個、いっこ:en (liten sak)'],
+    ['en [liten sak]','一個', '一個、いっこ:en (liten sak)'],
     ['individ','個人', '個人、こじん:individ'],
     ['skratta(わら、え)','笑', '笑う、わらう:skratta・笑顔、えかお:le'],
     ['skratta','笑う', '笑う、わらう:skratta'],
@@ -273,9 +273,7 @@ var words = [
     ['publik(こう)','公', '公園、こうえん:park・公平、こうへい:opartisk'],
     ['park','公園', '公園、こうえん:park'],
     ['opartisk','公平', '公平、こうへい:opartisk'],
-    ['park(えん)','園', '動物園、どうぶつえん:djurpark・遊園地、ゆうえんち:nöjespark'],
-    ['djurpark','動物園', '動物園、どうぶつえん:djurpark'],
-    ['nöjespark','遊園地', '遊園地、ゆうえんち:nöjespark'],
+    ['park(えん)(djurpark)','動物園', '動物園、どうぶつえん:djurpark'],
     ['fullt(こ、ご)','込', '込む、こむ:bli trångt med folk・人込み、ひとごみ:folksamling'],
     ['bli trångt med folk','込む', '込む、こむ:bli trångt med folk'],
     ['folksamling','人込み', '人込み、ひとごみ:folksamling'],
@@ -343,8 +341,8 @@ var words = [
     ['kvinna','女性', '女性、じょせい:kvinna'],
     ['kön','性別', '性別、せいべつ:kön'],
     ['bjuda in(しょう、まね)','招', '招待する、しょうたいする:bjuda in・招く、まねく:bjuda in'],
-    ['bjuda in(oregelbundet verb)','招待する', '招待する、しょうたいする:bjuda in'],
-    ['bjuda in(regelbundet verb)','招く','招く、まねく:bjuda in'],
+    ['bjuda in[oregelbundet verb]','招待する', '招待する、しょうたいする:bjuda in'],
+    ['bjuda in[regelbundet verb]','招く','招く、まねく:bjuda in'],
     ['ta(と)','取', '取る、とる:ta・受け取る、うけとる:ta emot・取り出す、とりだす:ta ut・取り消す、とりけす:upphäva'],
     ['ta','取る', '取る、とる:ta'],
     ['ta emot','受け取る', '受け取る、うけとる:ta emot'],
@@ -392,12 +390,12 @@ var words = [
     ['en efter en','次々', '次々、つぎつぎ:en efter en'],
     ['innehållsförteckning','目次', '目次、もくじ:innehållsförteckning'],
     ['kanjirepetering()','々', '人々、ひとびと:folk・色々、いろいろ:diverse・時々、ときどき:ibland・少々、しょうしょう:lite・先々週、せんせんしゅう:förrförra veckan・別々、べつべつ:separat'],
-    ['kanjirepetering(folk)','人々', '人々、ひとびと:folk'],
-    ['kanjirepetering(diverse)','色々', '色々、いろいろ:diverse'],
-    ['kanjirepetering(ibland)','時々', '時々、ときどき:ibland'],
-    ['kanjirepetering(lite)','少々', '少々、しょうしょう:lite'],
-    ['kanjirepetering(förrförra veckan)','先々週', '先々週、せんせんしゅう:förrförra veckan'],
-    ['kanjirepetering(separat)','別々', '別々、べつべつ:separat'],
+    ['kanjirepetering[folk]','人々', '人々、ひとびと:folk'],
+    ['kanjirepetering[diverse]','色々', '色々、いろいろ:diverse'],
+    ['kanjirepetering[ibland]','時々', '時々、ときどき:ibland'],
+    ['kanjirepetering[lite]','少々', '少々、しょうしょう:lite'],
+    ['kanjirepetering[förrförra veckan]','先々週', '先々週、せんせんしゅう:förrförra veckan'],
+    ['kanjirepetering[separat]','別々', '別々、べつべつ:separat'],
     ['annan(た、ほか)','他', 'その他、そのた:andra・その他、そのほか:andra・他の、たの:annan・他の、ほかの:annan・他人、たにん:främling'],
     ['andra','その他', 'その他、そのた:andra'],
     ['andra','その他','その他、そのほか:andra'],
@@ -563,6 +561,11 @@ function newKanji() {
 function nextKanji() {
     kanji = (kanji + 1) % wordCount;
     updateKanji();
+}
+function showThisKanji(index) {
+    kanji = index;
+    updateKanji();
+    window.scrollTo(0,0);
 }
 function prevKanji() {
     kanji = (kanji - 1 + wordCount) % wordCount;
@@ -819,7 +822,10 @@ jämföra streckordning och utseende med facit.</p>
                 || word === '結婚する' || word === '一枚' || word === '一冊' || word === '一億' || word === '三倍') {
                 hex = words[i][1].toString().charCodeAt(1).toString(16);
             }
-            td0.innerHTML = '<img width = "80" src="svg/0' + hex + '.svg"/>';
+            if (word === '動物園') {
+                hex = words[i][1].toString().charCodeAt(2).toString(16);
+            }
+            td0.innerHTML = '<img onclick="showThisKanji(' + i + ');" width = "80" src="svg/0' + hex + '.svg"/>';
         }
         td1.appendChild(text1);
         td2.appendChild(text2);
