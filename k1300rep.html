@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kanji för jp1200 skriftsystem 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="g1200bv.css">
+</head>
+<body onload="init();">
+<p id="question"></p>
+<script>
+var words = [
+    ['ett(いっ)','一', ''],
+
+    ['7()','七', ''],
+    ['9()','九', ''],
+    ['2(に)','二', ''],
+    ['person(じん)','人', ''],
+    ['ingång(はい)','入', ''],
+    ['8()','八', ''],
+    ['10()','十', ''],
+
+    ['10000()','万', ''],
+    ['3()','三', ''],
+    ['upp()','上', ''],
+    ['ner()','下', ''],
+    ['1000()','千', ''],
+    ['mun(ぐち)','口', ''],
+    ['jord()','土', ''],
+    ['kvällning()','夕', ''],
+    ['stor(おお、だい)','大', ''],
+    ['kvinna(じょ)','女', ''],
+    ['barn(こ)','子', ''],
+    ['liten()','小', ''],
+    ['berg()','山', ''],
+    ['flod()','川', ''],
+    ['hantverk(こう)','工', ''],
+    ['kanjirepetering()','々', '人々、ひとびと:folk・色々、いろいろ:diverse・時々、ときどき:ibland・少々、しょうしょう:lite・先々週、せんせんしゅう:förrförra veckan・別々、べつべつ:separat'],
+    ['kanjirepetering[folk]','人々', '人々、ひとびと:folk'],
+    ['kanjirepetering[diverse]','色々', '色々、いろいろ:diverse'],
+    ['kanjirepetering[ibland]','時々', '時々、ときどき:ibland'],
+    ['kanjirepetering[lite]','少々', '少々、しょうしょう:lite'],
+    ['kanjirepetering[förrförra veckan]','先々週', '先々週、せんせんしゅう:förrförra veckan'],
+    ['kanjirepetering[separat]','別々', '別々、べつべつ:separat'],
+
+    ['anti(ふ)','不', ''],
+    ['i(なか、ちゅう','中', ''],
+    ['avancera(よ)','予', ''],
+    ['5()','五', ''],
+    ['nu()','今', ''],
+    ['ursprung()','元', ''],
+    ['6()','六', ''],
+    ['yen()','円', ''],
+    ['del(ぶん)','分', ''],
+    ['hugga()','切', ''],
+    ['ändring(か)','化', ''],
+    ['vän(ゆう)','友', ''],
+    ['sky()','天', ''],
+    ['lite(しょう)','少', ''],
+    ['hjärta(しん、こころ)','心', ''],
+    ['hand(て)','手', ''],
+    ['mening(ぶん)','文', ''],
+    ['riktning(ほう)','方', ''],
+    ['dag(ひ、に)','日', ''],
+    ['måne(げつ)','月', ''],
+    ['träd()','木', ''],
+    ['stopp()','止', ''],
+    ['vatten(すい)','水', ''],
+    ['eld()','火', ''],
+    ['pappa(ふ)','父', ''],
+    ['middagstid()','牛', ''],
+    ['hund()','犬', ''],
+    ['kung()','王', ''],
+
+    ['bok(ほん)','世', ''],
+    ['main(しゅ)','主', ''],
+    ['tjäna()','仕', ''],
+    ['storebror()','兄', ''],
+    ['vinter()','冬', ''],
+    ['ut(だ、で)','出', ''],
+    ['norr()','北', ''],
+    ['halv()','半', ''],
+    ['gammal()','古', ''],
+    ['stånd()','台', ''],
+    ['höger(みぎ)','右', ''],
+    ['4()','四', ''],
+    ['utanför()','外', ''],
+    ['vänster()','左', ''],
+    ['rymlig()','広', ''],
+    ['slut(まつ、すえ)','末', '週末、しゅうまつ:veckohelg・月末、げつまつ:månadsslut・年末、ねんまつ:årsslut・末、すえ:periodslut・末っ子、すえっこ:yngsta barnet'],
+    ['veckohelg','週末', '週末、しゅうまつ:veckohelg'],
+    ['månadsslut','月末', '月末、げつまつ:månadsslut'],
+    ['årsslut','年末', '年末、ねんまつ:årsslut'],
+    ['periodslut','末', '末、すえ:periodslut'],
+    ['yngsta barnet','末っ子', '末っ子、すえっこ:yngsta barnet'],
+    ['bok(ほん)','本', ''],
+    ['mamma(ぼ)','母', ''],
+    ['födelse(う,せい)','生', ''],
+    ['uppgift(よう)','用', ''],
+    ['risåker()','田', ''],
+    ['vir()','白', ''],
+    ['öga(もく,め)','目', ''],
+    ['pil()','矢', ''],
+    ['stå(た)','立', ''],
+
+    ['vila(きゅう)','休', ''],
+    ['möte(かい)','会', ''],
+    ['själv(じ)','先', ''],
+    ['allt, tur(ぜん、まった)','全', '全部、ぜんぶ:allt・安全、あんぜん:säkerhet・全国、ぜんこく:hela landet・全員、ぜんいん:alla medlemmar・全く、まったく:helt och hållet'],
+    ['allt','全部', '全部、ぜんぶ:allt'],
+    ['säkerhet','安全', '安全、あんぜん:säkerhet'],
+    ['hela landet','全国', '全国、ぜんこく:hela landet・全員'],
+    ['alla medlemmar','全員', '全員、ぜんいん:alla medlemmar'],
+    ['helt och hållet','全く', '全く、まったく:helt och hållet'],
+    ['samma()','同', ''],
+    ['namn()','名', ''],
+    ['repetition(かい)','回', ''],
+    ['jord(ち)','地', ''],
+    ['mycket()','多', ''],
+    ['gilla()','好', ''],
+    ['tecken(じ)','字', ''],
+    ['skydda()','守', ''],
+    ['billig(あん)','安', ''],
+    ['tempel()','寺', ''],
+    ['år(ねん)','年', ''],
+    ['tidig()','早', ''],
+    ['existera()','有', ''],
+    ['nästa(じ、つぎ)','次', '次、つぎ:nästa・次々、つぎつぎ:en efter en・目次、もくじ:innehållsförteckning'],
+    ['nästa','次', '次、つぎ:nästa'],
+    ['en efter en','次々', '次々、つぎつぎ:en efter en'],
+    ['innehållsförteckning','目次', '目次、もくじ:innehållsförteckning'],
+    ['själv(じ)','死', ''],
+    ['själv(じ)','毎', ''],
+    ['kraft(き)','気', ''],
+    ['smutsig(きたな、よご)','汚', '汚い、きたない:smutsig・汚れる、よごれる:bli smutsig・汚す、よごす:smutsa ner'],
+    ['smutsig','汚い', '汚い、きたない:smutsig'],
+    ['bli smutsig','汚れる', '汚れる、よごれる:bli smutsig'],
+    ['smutsa ner','汚す', '汚す、よごす:smutsa ner'],
+    ['100()','百', ''],
+    ['bambu()','竹', ''],
+    ['tråd()','糸', ''],
+    ['idé()','考', ''],
+    ['öra()','耳', ''],
+    ['kött()','肉', ''],
+    ['själv(じ)','自', ''],
+    ['färg(いろ)','色', ''],
+    ['gå till()','行', ''],
+    ['väst()','西', ''],
+
+
+    ['bo()','住', ''],
+    ['kropp(たい)','体', ''],
+    ['vad()','何', ''],
+    ['tillverka()','作', ''],
+    ['först(しょ、はじ)','初', '初めは、はじめは:från början・初めて、はじめて:första gången'],
+    ['från början','初めは', '初めは、はじめは:från början'],
+    ['först gången','初めて', '初めて、はじめて:först gången'],
+    ['vinst(り)','利', '便利、べんり:bekväm・利用する、りようする:använda'],
+    ['bekväm','便利', '便利、べんり:bekväm'],
+    ['använda','利用する', '利用する、りようする:använda'],
+    ['doktor()','医', ''],
+    ['teckning()','図', ''],
+    ['sälja()','売', ''],
+    ['lillebror()','弟', ''],
+    ['glömma(わす)','忘', '忘れる、わすれる:glömma・忘れ物、わすれもの:kvarlämnade saker'],
+    ['glömma','忘れる', '忘れる、わすれる:glömma'],
+    ['kvarlämnade saker','忘れ物', '忘れ物、わすれもの:kvarlämnade saker'],
+    ['nästa(らい)','来', ''],
+    ['man(だん)','男', ''],
+    ['stad()','町', ''],
+    ['helgedom(しゃ、じゃ)','社', ''],
+    ['jag()','私', ''],
+    ['forskning()','究', ''],
+    ['blomma()','花', ''],
+    ['se()','見', ''],
+    ['säga(こと)','言', ''],
+    ['skaldjur()','貝', ''],
+    ['röd()','赤', ''],
+    ['gå()','走', ''],
+    ['fot(こと)','足', ''],
+    ['fordon(くるま、しゃ)','車', ''],
+    ['kort(きん)','近', ''],
+    ['återvända()','返', ''],
+
+    ['sak(じ)','事', ''],
+    ['huvudstad()','京', ''],
+    ['använda()','使', ''],
+    ['ta examen(そつ)','卒', '卒業、そつぎょう:examen・卒業式、そつぎょうしき:examensceremoni・卒業生、そつぎょうせい:person som tagit studenten'],
+    ['examen','卒業', '卒業、そつぎょう:examen'],
+    ['examensceremoni','卒業式', '卒業式、そつぎょうしき:examensceremoni'],
+    ['person som tagit studenten','卒業生', '卒業生、そつぎょうせい:person som tagit studenten'],
+    ['ta(と)','取', '取る、とる:ta・受け取る、うけとる:ta emot・取り出す、とりだす:ta ut・取り消す、とりけす:upphäva'],
+    ['ta','取る', '取る、とる:ta'],
+    ['ta emot','受け取る', '受け取る、うけとる:ta emot'],
+    ['ta ut','取り出す', '取り出す、とりだす:ta ut'],
+    ['upphäva','取り消す', '取り消す、とりけす:upphäva'],
+    ['mottaga(じゅ、う)','受', '受ける、うける:ta emot・受付、うけつけ:reception・受験、じゅけん:görande av examination'],
+    ['ta emot','受ける', '受ける、うける:ta emot'],
+    ['reception','受付', '受付、うけつけ:reception'],
+    ['görande av examination','受験','受験、じゅけん:görande av examination'],
+    ['smaka()','味', ''],
+    ['nation(こく)','国', ''],
+    ['natt()','夜', ''],
+    ['lillasyster()','妹', ''],
+    ['storasyster()','姉', ''],
+    ['börja()','始', ''],
+    ['skola(がく)','学', ''],
+    ['affär()','店', ''],
+    ['plats(しょ)','所', ''],
+    ['ljus()','明', ''],
+    ['länge sedan()','昔', ''],
+    ['kläder()','服', ''],
+    ['öst(とう、ひがし)','東', ''],
+    ['gå()','歩', ''],
+    ['hälla()','注', ''],
+    ['sak(ぶつ、もの)','物', ''],
+    ['bild()','画', ''],
+    ['veta(し)','知', ''],
+    ['sky()','空', ''],
+    ['person(もの,しゃ)','者', ''],
+    ['ung(わか)','若', '若い、わかい:ung・若者、わかもの:unga'],
+    ['ung','若い', '若い、わかい:ung'],
+    ['unga','若者', '若者、わかもの:unga'],
+    ['engelska()','英', ''],
+    ['guld()','金', ''],
+    ['lång,chef(なが、ちょう)','長', ''],
+    ['port()','門', ''],
+    ['regn()','雨', ''],
+    ['blå()','青', ''],
+
+    ['borda()','乗', ''],
+    ['bekväm(べん)','便', ''],
+    ['framför(し)','前', ''],
+    ['syd(し)','南', ''],
+    ['konstig()','変', ''],
+    ['tak,affär(おく、や)','屋', ''],
+    ['grad()','度', ''],
+    ['vänta(たい)','待', ''],
+    ['bakom(ご)','後', ''],
+    ['tänka()','思', ''],
+    ['plocka()','拾', ''],
+    ['hålla()','持', ''],
+    ['projicera()','映', ''],
+    ['vår()','春', ''],
+    ['middag(ひる)','昼', ''],
+    ['tvätta(たく)','濯', '洗濯する、せんたくする:tvätta・洗濯物、せんたくもの:smutstvätt'],
+    ['tvätta','洗濯する', '洗濯する、せんたくする:tvätta'],
+    ['smutstvätt','洗濯物', '洗濯物、せんたくもの:smutstvätt'],
+    ['aktiv(かつ)','活', '生活、せいかつ:liv・活動、かつどう:aktivitet'],
+    ['liv','生活', '生活、せいかつ:liv'],
+    ['aktivitet','活動', '活動、かつどう:aktivitet'],
+    ['hav()','海', ''],
+    ['tänka(し)','界', ''],
+    ['tänka(し)','研', ''],
+    ['tänka(し)','神', ''],
+    ['tänka(し)','秋', ''],
+    ['tänka(し)','約', ''],
+    ['tänka(し)','茶', ''],
+    ['tänka(し)','計', ''],
+    ['tänka(し)','送', ''],
+    ['tung(じゅう)','重', ''],
+    ['tänka(し)','音', ''],
+    ['tänka(し)','風', ''],
+    ['äta(た、しょく)','食', ''],
+
+    ['ett(いっ)','借', ''],
+    ['ett(いっ)','勉', ''],
+    ['medlem(いん)','員', ''],
+    ['ett(いっ)','夏', ''],
+    ['hem(か)','家', ''],
+    ['återvända(き)','帰', ''],
+    ['svag(じゃく)','弱', ''],
+    ['ingrediens(りょう)','料', ''],
+    ['ett(いっ)','旅', ''],
+    ['tid(とき)','時', ''],
+    ['skriva(か)','書', ''],
+    ['ett(いっ)','校', ''],
+    ['slå av,försvinna(しょう、け、き)','消', '消す、けす:slå av・消える、きえる:något slås av, försvinna・消化する、しょうかする:smälta'],
+    ['slå av','消す', '消す、けす:slå av'],
+    ['något slås av, försvinna','消える', '消える、きえる:något slås av, försvinna'],
+    ['smälta','消化する', '消化する、しょうかする:smälta'],
+    ['ett(いっ)','留', ''],
+    ['ett(いっ)','病', ''],
+    ['ett(いっ)','紙', ''],
+    ['bagage(に)+','荷物', '荷物、にもつ:bagage'],
+    ['skriva ner(き)','記', '日記、にっき:dagbok・暗記する、あんきする:lära sig utantill・記事、きじ:nyhetsartikel・記者、きしゃ:journalist・記入する、きにゅうする:fylla i'],
+    ['dagbok','日記', '日記、にっき:dagbok'],
+    ['lära sig utantill','暗記する','暗記する、あんきする:lära sig utantill'],
+    ['nyhetsartikel','記事', '記事、きじ:nyhetsartikel'],
+    ['journalist','記者', '記者、きしゃ:journalist'],
+    ['fylla i','記入する', '記入する、きにゅうする:fylla i'],
+    ['ett(いっ)','起', ''],
+    ['pendla(つう)','通', ''],
+    ['leverera(ぱい、くば)','配', '心配する、しんぱいする:oroa sig・配る、くばる:distribuera'],
+    ['oroa sig','心配する', '心配する、しんぱいする:oroa sig'],
+    ['distribuera','配る', '配る、くばる:distribuera'],
+    ['ett(いっ)','院', ''],
+    ['ett(いっ)','馬', ''],
+    ['hög(こう)','高', ''],
+
+    ['förflytta(どう)','動', ''],
+    ['ett(いっ)','問', ''],
+    ['giftermål(こん)(gifta sig)','結婚する', '結婚する、けっこんする:gifta sig'],
+    ['ett(いっ)','宿', ''],
+    ['ett(いっ)','強', ''],
+    ['ett(いっ)','悪', ''],
+    ['instruera(じゅ)','授', '授業、じゅぎょう:klass・教授、きょうじゅ:professor・授業料、じゅぎょうりょう:terminsavgift'],
+    ['klass','授業', '授業、じゅぎょう:klass'],
+    ['professor','教授', '教授、きょうじゅ:professor'],
+    ['terminsavgift','授業料', '授業料、じゅぎょうりょう:terminsavgift'],
+    ['lära ut(きょう)','教', ''],
+    ['ett(いっ)','族', ''],
+    ['ett(いっ)','球', ''],
+    ['förnuft(り)','理', ''],
+    ['sluta(しゅう)','終', ''],
+    ['passera genom(けい)','経', '経験、けいけん:erfarenhet・経済、けいざい:ekonomi・パリ経由、パリけいゆ:via Paris'],
+    ['erfarenhet','経験', '経験、けいけん:erfarenhet'],
+    ['ekonomi','経済', '経済、けいざい:ekonomi'],
+    ['via Paris','パリ経由', 'パリ経由、パリけいゆ:via Paris'],
+    ['inlärning(しゅう)','習', ''],
+    ['rulla(てん)','転', ''],
+    ['vecka(しゅう)','週', ''],
+    ['sektion(ぶ)','部', '部屋、へや:rum・部長、ぶちょう:avdelningschef・一部、いちぶ:en del・テニス部、テニス部:tennislag・工学部、こうがくぶ:dept of engineering・大部分、だいぶぶん:större delen av'],
+    ['rum','部屋', '部屋、へや:rum'],
+    ['avdelningschef','部長', '部長、ぶちょう:avdelningschef'],
+    ['en del','一部', '一部、いちぶ:en del'],
+    ['tennislag','テニス部', 'テニス部、テニス部:tennislag'],
+    ['dept of engineering','工学部', '工学部、こうがくぶ:dept of engineering'],
+    ['större delen av','大部分', '大部分、だいぶぶん:större delen av'],
+    ['ett(いっ)','野', ''],
+    ['ett(いっ)','雪', ''],
+    ['ett(いっ)','魚', ''],
+    ['ett(いっ)','鳥', ''],
+    ['ett(いっ)','黒', ''],
+
+    ['ett(いっ)','場', ''],
+    ['ett(いっ)','寒', ''],
+    ['ett(いっ)','晴', ''],
+    ['ett(いっ)','暑', ''],
+    ['yttersta(さい、もっと)','最', '最初、さいしょ:först・最後、さいご:sist・最近、さいきん:nyligen・最高、さいこう:bäst・最低、さいてい:lägst・最新、さいしん:senast・最も、もっとも:mest・最終電車、さいしゅうでんしゃ:sista tåget'],
+    ['först','最初', '最初、さいしょ:först'],
+    ['sist','最後', '最後、さいご:sist'],
+    ['nyligen','最近', '最近、さいきん:nyligen'],
+    ['bäst','最高', '最高、さいこう:bäst'],
+    ['lägst','最低', '最低、さいてい:lägst'],
+    ['senast','最新', '最新、さいしん:senast'],
+    ['mest','最も', '最も、もっとも:mest'],
+    ['sista tåget','最終電車', '最終電車、さいしゅうでんしゃ:sista tåget'],
+    ['ett(いっ)','朝', ''],
+    ['ett(いっ)','港', ''],
+    ['omgång(ばん)','番', '一番、いちばん:nummer ett・番号、ばんごう:nummer・二番目、にばんめ:andra i ordning'],
+    ['nummer ett','一番', '一番、いちばん:nummer ett'],
+    ['nummer','番号', '番号、ばんごう:nummer'],
+    ['andra i ordning','二番目', '二番目、にばんめ:andra i ordning'],
+    ['smärta(つう、いた)','痛', '痛い、いたい:smärtsam・痛み、いたみ:smärta・頭痛、ずつう:huvudvärk'],
+    ['smärtsam','痛い', '痛い、いたい:smärtsam'],
+    ['smärta','痛み', '痛み、いたみ:smärta'],
+    ['huvudvärk','頭痛', '頭痛、ずつう:huvudvärk'],
+    ['ett(いっ)','着', ''],
+    ['ett(いっ)','答', ''],
+    ['knyta(けっ、むす)','結', '結ぶ、むすぶ:knyta・結果、けっか:resultat'],
+    ['knyta','結ぶ', '結ぶ、むすぶ:knyta'],
+    ['resultat','結果', '結果、けっか:resultat'],
+    ['ett(いっ)','買', ''],
+    ['ett(いっ)','貸', ''],
+    ['ett(いっ)','遅', ''],
+    ['transportera, tur(うん、はこ)','運', ''],
+    ['väg(みち)','道', ''],
+    ['ett(いっ)','開', ''],
+    ['mellan(かん、あいだ)','間', ''],
+    ['ett(いっ)','飯', ''],
+    ['dricka(の)','飲', ''],
+
+    ['ett(いっ)','働', ''],
+    ['ett(いっ)','意', ''],
+    ['ny(しん)','新', ''],
+    ['mörk(あん)','暗', ''],
+    ['affärer(ぎょう)','業', ''],
+    ['ett(いっ)','楽', ''],
+    ['ett(いっ)','漢', ''],
+    ['ett(いっ)','試', ''],
+    ['ett(いっ)','話', ''],
+    ['annorlunda(ちが)','違', '違う、ちがう:skilja sig・間違える、まちがえる:göra misstag・間違い、まちがい:misstag・違い、ちがい:skillnad'],
+    ['skilja sig från','違う', '違う、ちがう:skilja sig från'],
+    ['göra misstag','間違える', '間違える、まちがえる:göra misstag'],
+    ['misstag','間違い', '間違い、まちがい:misstag'],
+    ['skillnad','違い', '違い、ちがい:skillnad'],
+    ['el(でん)','電', ''],
+
+    ['ett(いっ)','様', ''],
+    ['ett(いっ)','歌', ''],
+    ['elaborera(れん)(öva)','練習', '練習、れんしゅう:öva'],
+    ['ett(いっ)','聞', ''],
+    ['ett(いっ)','語', ''],
+    ['ett(いっ)','読', ''],
+    ['ett(いっ)','銀', ''],
+    ['ett(いっ)','駅', ''],
+
+    ['ett(いっ)','横', ''],
+    ['ett(いっ)','調', ''],
+    ['ett(いっ)','質', ''],
+
+    ['ett(いっ)','薬', ''],
+    ['familj(しん)','親', ''],
+    ['ett(いっ)','館', ''],
+
+    ['ett(いっ)','曜', ''],
+    ['ett(いっ)','職', ''],
+    ['ett(いっ)','題', ''],
+    ['ansikte(かお)','顔', ''],
+    ['undersöka(けん)','験', ''],
+
+];
+var wordCount = words.length;
+var kanji = 0;
+var isShowing = false;
+var show = false;
+function toggleShow() {
+    show = !show;
+    if(show) {
+        document.getElementById('vbut').style['background-color'] = "lightblue";
+    } else {
+        document.getElementById('vbut').style['background-color'] = "gray";
+    }
+}
+function getRandomInt() {
+    return Math.floor(Math.random() * (wordCount));
+}
+function clearCanvas() {
+    var ctx = document.getElementById('drawing').getContext('2d');
+    ctx.clearRect(0, 0, 1200,300);
+    ctx.beginPath();
+}
+function updateKanji() {
+//    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+    var info = words[kanji][0];
+    if (storageAvailable()) {
+        info += " " + kanji + "/" + words.length;
+        var ctr = localStorage.getItem("k2bctr" + kanji);
+        var cer = localStorage.getItem("k2bcer" + kanji);
+        var cts = localStorage.getItem("k2bcts" + kanji);
+        if (cts) {
+            info += " Tries: " + ctr;
+            info += " Errors: " + cer;
+            info += " Last try: " + cts;
+        }
+    }
+    // +' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
+    document.getElementById('question').innerText=info;
+    clearCanvas();
+    isShowing = show;
+    if (isShowing) {
+        typeKanji();
+    } else {
+        document.getElementById('answer').innerText=' ';
+        document.getElementById('usage').innerText='* ';
+    }
+}
+function newKanji() {
+    kanji = getRandomInt();
+    updateKanji();
+}
+function nextKanji() {
+    kanji = (kanji + 1) % wordCount;
+    updateKanji();
+}
+function showThisKanji(index) {
+    kanji = index;
+    updateKanji();
+    window.scrollTo(0,0);
+}
+function prevKanji() {
+    kanji = (kanji - 1 + wordCount) % wordCount;
+    updateKanji();
+}
+
+function typeKanji() {
+    isShowing = true;
+    document.getElementById('usage').innerText = '* ' + words[kanji][2];
+    var len = words[kanji][1].toString().length;
+    var s = "";
+    for (var i = 0; i < len; i++) {
+        var hex = words[kanji][1].toString().charCodeAt(i).toString(16);
+        s += '<img class = "svg" width = "280" src="svg/0' + hex + '.svg"/>'
+    }
+    document.getElementById('answer').innerHTML = s;
+    if (storageAvailable()) {
+        var ctr = Number(localStorage.getItem("k2bctr" + kanji));
+        var cer = Number(localStorage.getItem("k2bcer" + kanji));
+        var cts = localStorage.getItem("k2bcts" + kanji);
+        if (!cts) {
+            localStorage.setItem("k2bctr" + kanji, 1);
+            localStorage.setItem("k2bcer" + kanji, 0);
+            localStorage.setItem("k2bcts" + kanji, Date.now());
+        } else {
+            localStorage.setItem("k2bctr" + kanji, ctr + 1);
+            localStorage.setItem("k2bcer" + kanji, cer);
+            localStorage.setItem("k2bcts" + kanji, Date.now());
+        }
+    }
+}
+
+function wrongAnswer() {
+    if (storageAvailable()) {
+        var cer = Number(localStorage.getItem("k2bcer" + kanji));
+        var cts = localStorage.getItem("k2bcts" + kanji);
+        if (!cts) {
+            localStorage.setItem("k2bctr" + kanji, 1);
+            localStorage.setItem("k2bcer" + kanji, 1);
+            localStorage.setItem("k2bcts" + kanji, Date.now());
+        } else {
+            localStorage.setItem("k2bcer" + kanji, cer + 1);
+            localStorage.setItem("k2bcts" + kanji, Date.now());
+        }
+    }
+}
+
+function bestQuestion() {
+    var newKanji = null;
+    var wrongAnswer = null;
+    var wrongAnswerCnt = null;
+    var oldestAnswer = null;
+    var oldestTime = null;
+    var wrongTime = null;
+    for (var x = 0; x < wordCount; x++) {
+//        var ctr = Number(localStorage.getItem("k2bctr" + x));
+        var cer = Number(localStorage.getItem("k2bcer" + x));
+        var cts = Number(localStorage.getItem("k2bcts" + x));
+        if (cts) {
+            if (cer >= 1) {
+                if (wrongTime === null || wrongTime > cts) {
+                    wrongTime = cts;
+                    wrongAnswer = x;
+                    wrongAnswerCnt = cer;
+                }
+            }
+            if (oldestTime === null || oldestTime > cts) {
+                oldestTime = cts;
+                oldestAnswer = x;
+            }
+        } else {
+            if (newKanji === null) {
+                newKanji = x;
+            }
+        }
+    }
+    var nextKanjiType = Math.floor(Math.random() * (100));
+    if (nextKanjiType < 20 && newKanji !== null) {
+        kanji = newKanji;
+    } else if (nextKanjiType < 30 && wrongAnswer !== null) {
+        localStorage.setItem("k2bcer" + wrongAnswer, wrongAnswerCnt - 1);
+        kanji = wrongAnswer;
+    } else if (oldestAnswer !== null) {
+        kanji = oldestAnswer;
+    } else {
+        kanji = 0;
+    }
+    updateKanji();
+}
+
+function showKanji() {
+    if (isShowing) {
+        isShowing = false;
+        document.getElementById('answer').innerText=' ';
+        document.getElementById('usage').innerText='* ';
+    } else {
+        typeKanji();
+    }
+}
+function storageAvailable() {
+    try {
+        var x = '__x';
+        localStorage.setItem(x, x);
+        localStorage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return false;
+    }
+}
+
+document.getElementById('question').innerText=words[0][0];
+
+var myPen;
+function init() {
+    var canvas = document.getElementById('drawing');
+    var context = canvas.getContext('2d');
+    context.strokeStyle="#995522";
+    context.lineWidth=6;
+    canvas.addEventListener('mousedown', handleMouseEvent, false);
+    canvas.addEventListener('mouseup', handleMouseEvent, false);
+    canvas.addEventListener('mousemove', handleMouseEvent, false);
+
+    myPen = new Pen(context);
+    canvas.addEventListener("touchstart", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousedown", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    canvas.addEventListener("touchend", function (e) {
+        var mouseEvent = new MouseEvent("mouseup", {});
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchmove", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousemove", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    document.body.addEventListener("touchstart", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchend", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchmove", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+}
+
+function Pen(context) {
+    var isDrawing = false;
+    var self = this;
+
+    self.mousedown = function(e, x, y) {
+        context.beginPath();
+        context.moveTo(x, y);
+        isDrawing = true;
+    };
+
+    self.mouseup = function(e, x, y) {
+        if (isDrawing) {
+            self.mousemove(e);
+            isDrawing = false;
+        }
+    };
+    self.mousemove = function(e, x, y) {
+        if (isDrawing) {
+            context.lineTo(x, y);
+            context.stroke();
+        }
+    };
+}
+function handleMouseEvent(e) {
+    var x = 0, y = 0;
+    if (e.layerX || e.layerX === 0) {
+        x = e.layerX;
+        y = e.layerY;
+    } else if (e.offsetX || e.offsetX === 0) {
+        x = e.offsetX;
+        y = e.offsetY;
+    }
+    if (myPen[e.type]) {
+        myPen[e.type](e,x,y);
+    }
+    console.log(e.type, x, y);
+}
+
+
+</script>
+<div id="holder">
+    <canvas id="drawing" width="1180" height="280"></canvas>
+</div>
+<p class="ultra-large" id="answer"> </p>
+<p id="usage">* </p>
+<button id="vbut" onclick="toggleShow();">V</button>
+<button onclick="showKanji();">VISA</button>
+<button onclick="newKanji();">SLUMP</button>
+<button onclick="prevKanji();">&lt;</button>
+<button onclick="nextKanji();">&gt;</button>
+<button onclick="clearCanvas();">RENSA</button>
+<button onclick="wrongAnswer();">FEL</button>
+<button onclick="bestQuestion();">Q</button>
+<h2>Instruktioner</h2>
+<p>JP1200 skriftsystem 2</p>
+<p>Observera att "hjärta" och framåt är repetition av tecken som inte är nya men ingår i glosorna.</p>
+<p>Rita det tecken som efterfrågas (med mus eller finger), när du är klar tryck på visa, så kan du
+jämföra streckordning och utseende med facit.</p>
+<ul>
+    <li>V: Slå av/på att visa facit direkt när man väljer nytt tecken, bra om man bara vill gå igenom lite snabbt</li>
+    <li>VISA: Visa facit, eller dölj om det redan visas</li>
+    <li>SLUMP: Välj ett nytt slumpvis tecken</li>
+    <li>&gt;: Välj nästa tecken i ordning</li>
+    <li>&lt;: Välj föregående tecken</li>
+    <li>RENSA: Töm ritytan ifall man vill börja om att rita</li>
+</ul>
+<table id="table">
+</table>
+<footer>
+    <p>I would like to thank the Kanji VG project (http://kanjivg.tagaini.net/). I am not associated with Kanji VG, just a user.
+        The kanji svg files (i.e. the kanji drawings with stroke order) are used by permission under the following licens:</p>
+    <h4>Licence</h4>
+    <p>KanjiVG is copyright © 2009-2015 Ulrich Apel and released under the Creative Commons Attribution-Share Alike 3.0 license.<br>
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/">https://creativecommons.org/licenses/by-sa/3.0/</a></p>
+</footer>
+<script>
+    var table = document.getElementById('table');
+    for (var i = 0; i < wordCount; i++){
+        var tr = document.createElement('tr');
+
+        var td0 = document.createElement('td');
+        var td1 = document.createElement('td');
+        var td2 = document.createElement('td');
+
+        var text1 = document.createTextNode(words[i][0]);
+        var text2 = document.createTextNode(words[i][2]);
+        if ((words[i][0]).indexOf('(') > 0) {
+            var hex = words[i][1].toString().charCodeAt(0).toString(16);
+            var word = words[i][1];
+            if (word === 'お皿' || word === '残念' || word === '生徒' || word === '法律' || word === '政党' || word === '右側'
+                || word === '結婚する' || word === '一枚' || word === '一冊' || word === '一億' || word === '三倍') {
+                hex = words[i][1].toString().charCodeAt(1).toString(16);
+            }
+            if (word === '動物園') {
+                hex = words[i][1].toString().charCodeAt(2).toString(16);
+            }
+            td0.innerHTML = '<img onclick="showThisKanji(' + i + ');" width = "80" src="svg/0' + hex + '.svg"/>';
+        }
+        td1.appendChild(text1);
+        td2.appendChild(text2);
+        tr.appendChild(td0);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+        table.appendChild(tr);
+    }
+</script>
+</body>
+</html>
