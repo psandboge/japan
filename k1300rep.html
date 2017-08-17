@@ -432,20 +432,20 @@ function clearCanvas() {
     ctx.beginPath();
 }
 function updateKanji() {
-    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+//    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
     var info = words[kanji][0];
     if (storageAvailable()) {
         info += " " + kanji + "/" + words.length;
-        var ctr = localStorage.getItem("k2bctr" + kanji);
-        var cer = localStorage.getItem("k2bcer" + kanji);
-        var cts = localStorage.getItem("k2bcts" + kanji);
+        var ctr = localStorage.getItem("k3bctr" + kanji);
+        var cer = localStorage.getItem("k3bcer" + kanji);
+        var cts = localStorage.getItem("k3bcts" + kanji);
         if (cts) {
             info += " Tries: " + ctr;
             info += " Errors: " + cer;
             info += " Last try: " + cts;
         }
     }
-    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
+//    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
     document.getElementById('question').innerText=info;
     clearCanvas();
     isShowing = show;
@@ -485,32 +485,32 @@ function typeKanji() {
     }
     document.getElementById('answer').innerHTML = s;
     if (storageAvailable()) {
-        var ctr = Number(localStorage.getItem("k2bctr" + kanji));
-        var cer = Number(localStorage.getItem("k2bcer" + kanji));
-        var cts = localStorage.getItem("k2bcts" + kanji);
+        var ctr = Number(localStorage.getItem("k3bctr" + kanji));
+        var cer = Number(localStorage.getItem("k3bcer" + kanji));
+        var cts = localStorage.getItem("k3bcts" + kanji);
         if (!cts) {
-            localStorage.setItem("k2bctr" + kanji, 1);
-            localStorage.setItem("k2bcer" + kanji, 0);
-            localStorage.setItem("k2bcts" + kanji, Date.now());
+            localStorage.setItem("k3bctr" + kanji, 1);
+            localStorage.setItem("k3bcer" + kanji, 0);
+            localStorage.setItem("k3bcts" + kanji, Date.now());
         } else {
-            localStorage.setItem("k2bctr" + kanji, ctr + 1);
-            localStorage.setItem("k2bcer" + kanji, cer);
-            localStorage.setItem("k2bcts" + kanji, Date.now());
+            localStorage.setItem("k3bctr" + kanji, ctr + 1);
+            localStorage.setItem("k3bcer" + kanji, cer);
+            localStorage.setItem("k3bcts" + kanji, Date.now());
         }
     }
 }
 
 function wrongAnswer() {
     if (storageAvailable()) {
-        var cer = Number(localStorage.getItem("k2bcer" + kanji));
-        var cts = localStorage.getItem("k2bcts" + kanji);
+        var cer = Number(localStorage.getItem("k3bcer" + kanji));
+        var cts = localStorage.getItem("k3bcts" + kanji);
         if (!cts) {
-            localStorage.setItem("k2bctr" + kanji, 1);
-            localStorage.setItem("k2bcer" + kanji, 1);
-            localStorage.setItem("k2bcts" + kanji, Date.now());
+            localStorage.setItem("k3bctr" + kanji, 1);
+            localStorage.setItem("k3bcer" + kanji, 1);
+            localStorage.setItem("k3bcts" + kanji, Date.now());
         } else {
-            localStorage.setItem("k2bcer" + kanji, cer + 1);
-            localStorage.setItem("k2bcts" + kanji, Date.now());
+            localStorage.setItem("k3bcer" + kanji, cer + 1);
+            localStorage.setItem("k3bcts" + kanji, Date.now());
         }
     }
 }
@@ -523,9 +523,9 @@ function bestQuestion() {
     var oldestTime = null;
     var wrongTime = null;
     for (var x = 0; x < wordCount; x++) {
-//        var ctr = Number(localStorage.getItem("k2bctr" + x));
-        var cer = Number(localStorage.getItem("k2bcer" + x));
-        var cts = Number(localStorage.getItem("k2bcts" + x));
+//        var ctr = Number(localStorage.getItem("k3bctr" + x));
+        var cer = Number(localStorage.getItem("k3bcer" + x));
+        var cts = Number(localStorage.getItem("k3bcts" + x));
         if (cts) {
             if (cer >= 1) {
                 if (wrongTime === null || wrongTime > cts) {
@@ -548,7 +548,7 @@ function bestQuestion() {
     if (nextKanjiType < 20 && newKanji !== null) {
         kanji = newKanji;
     } else if (nextKanjiType < 30 && wrongAnswer !== null) {
-        localStorage.setItem("k2bcer" + wrongAnswer, wrongAnswerCnt - 1);
+        localStorage.setItem("k3bcer" + wrongAnswer, wrongAnswerCnt - 1);
         kanji = wrongAnswer;
     } else if (oldestAnswer !== null) {
         kanji = oldestAnswer;
