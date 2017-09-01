@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Glosor,  jp1300 text 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="g1200bv.css">
+</head>
+<body onload="init();">
+<p id="question"></p>
+<script>
+var words = [
+    ['geografi()','ちり', '地理:'],
+    ['alla()','みなさん', '皆さん:'],
+    ['stor()','おおき', '大き:'],
+    ['ö()','しま', '島:'],
+    ['kontinent()','たいりく', '大陸:'],
+    ['stor storstad()','とし', '都市:'],
+    ['Hokkaido()','ほっかいどう', '北海道:'],
+    ['Honshu()','ほんしゅう', '本州:'],
+    ['Shikoku()','しこく', '四国:'],
+    ['Kyushu()','きゅうしゅう', '九州:'],
+    ['allt()','ぜんたい', '全体:'],
+    ['prefektur, huvudstad()','と', '都:'],
+    ['prefektur, ö()','どう', '道:'],
+    ['prefektur, storstad()','ふ', '府:'],
+    ['prefektur()','けん', '県:'],
+    ['huvudstad()','しゅと', '首都:'],
+    ['krig()','せんそう', '戦争:'],
+    ['fred()','へいわ', '平和:'],
+    ['informera()','つたえる', '伝える:'],
+    ['klimat()','きこう', '気候:'],
+    ['dag()','ひ', '日:'],
+    ['lufttemperatur()','きおん', '気温:'],
+    ['skillnad()','さ', '差:'],
+    ['körsbärsblom()','さくら', '桜:'],
+    ['slut!()','おわり', '終わり:'],
+    ['människor()','ひとびと', '人々:'],
+    ['njuta()','たのしむ', '楽しむ:'],
+    ['sevärdhet()','めいしょ', '名所:'],
+    ['t ex()','たとえば', '例えば:'],
+    ['extremt()','もっとも', '最も:'],
+    ['vacker()','うつくしい', '美しい:'],
+    ['borg()','おしろ', 'お城:'],
+    ['sedan()','まえ', '前:'],
+    ['vägg()','かべ', '壁:'],
+    ['återstå()','のこる', '残る:'],
+    ['byggnad()','たてもの', '建物:'],
+    ['form()','かたち', '形:'],
+    ['filminspelning()','さつえい', '撮影:'],
+    ['sightseeing()','かんこう', '観光:'],
+    ['syfte()','もくてき', '目的:'],
+    ['avslappning()','リラックス', 'リラックスする:'],
+    ['sceneri()','けしき', '景色:'],
+    ['särskilt()','とくに', '特に:'],
+    ['storstad()','市', 'し:'],
+    ['våning()','かい', '階:'],
+    ['rundtur()','けんがく', '見学:'],
+
+//    ['()','', ':'],
+
+];
+var wordCount = words.length;
+var kanji = 0;
+var isShowing = false;
+var show = false;
+function toggleShow() {
+    show = !show;
+    if(show) {
+        document.getElementById('vbut').style['background-color'] = "lightblue";
+    } else {
+        document.getElementById('vbut').style['background-color'] = "gray";
+    }
+}
+function getRandomInt() {
+    return Math.floor(Math.random() * (wordCount));
+}
+function clearCanvas() {
+    var ctx = document.getElementById('drawing').getContext('2d');
+    ctx.clearRect(0, 0, 1200,300);
+    ctx.beginPath();
+}
+function updateKanji() {
+//    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+    var info = words[kanji][0];
+    if (storageAvailable()) {
+        info += " " + kanji + "/" + words.length;
+        var ctr = localStorage.getItem("k31bctr" + kanji);
+        var cer = localStorage.getItem("k31bcer" + kanji);
+        var cts = localStorage.getItem("k31bcts" + kanji);
+        if (cts) {
+            info += " Tries: " + ctr;
+            info += " Errors: " + cer;
+            info += " Last try: " + cts;
+        }
+    }
+//    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
+    document.getElementById('question').innerText=info;
+    clearCanvas();
+    isShowing = show;
+    if (isShowing) {
+        typeKanji();
+    } else {
+        document.getElementById('answer').innerText=' ';
+        document.getElementById('usage').innerText='* ';
+    }
+}
+function newKanji() {
+    kanji = getRandomInt();
+    updateKanji();
+}
+function nextKanji() {
+    kanji = (kanji + 1) % wordCount;
+    updateKanji();
+}
+function showThisKanji(index) {
+    kanji = index;
+    updateKanji();
+    window.scrollTo(0,0);
+}
+function prevKanji() {
+    kanji = (kanji - 1 + wordCount) % wordCount;
+    updateKanji();
+}
+
+function typeKanji() {
+    isShowing = true;
+    document.getElementById('usage').innerText = '* ' + words[kanji][2];
+    var len = words[kanji][1].toString().length;
+    var s = "";
+    for (var i = 0; i < len; i++) {
+        var hex = words[kanji][1].toString().charCodeAt(i).toString(16);
+        s += '<img class = "svg" width = "280" src="svg/0' + hex + '.svg"/>'
+    }
+    document.getElementById('answer').innerHTML = s;
+    if (storageAvailable()) {
+        var ctr = Number(localStorage.getItem("k31bctr" + kanji));
+        var cer = Number(localStorage.getItem("k31bcer" + kanji));
+        var cts = localStorage.getItem("k31bcts" + kanji);
+        if (!cts) {
+            localStorage.setItem("k31bctr" + kanji, 1);
+            localStorage.setItem("k31bcer" + kanji, 0);
+            localStorage.setItem("k31bcts" + kanji, Date.now());
+        } else {
+            localStorage.setItem("k31bctr" + kanji, ctr + 1);
+            localStorage.setItem("k31bcer" + kanji, cer);
+            localStorage.setItem("k31bcts" + kanji, Date.now());
+        }
+    }
+}
+
+function wrongAnswer() {
+    if (storageAvailable()) {
+        var cer = Number(localStorage.getItem("k31bcer" + kanji));
+        var cts = localStorage.getItem("k31bcts" + kanji);
+        if (!cts) {
+            localStorage.setItem("k31bctr" + kanji, 1);
+            localStorage.setItem("k31bcer" + kanji, 1);
+            localStorage.setItem("k31bcts" + kanji, Date.now());
+        } else {
+            localStorage.setItem("k31bcer" + kanji, cer + 1);
+            localStorage.setItem("k31bcts" + kanji, Date.now());
+        }
+    }
+}
+
+function bestQuestion() {
+    var newKanji = null;
+    var wrongAnswer = null;
+    var wrongAnswerCnt = null;
+    var oldestAnswer = null;
+    var oldestTime = null;
+    var wrongTime = null;
+    for (var x = 0; x < wordCount; x++) {
+//        var ctr = Number(localStorage.getItem("k31bctr" + x));
+        var cer = Number(localStorage.getItem("k31bcer" + x));
+        var cts = Number(localStorage.getItem("k31bcts" + x));
+        if (cts) {
+            if (cer >= 1) {
+                if (wrongTime === null || wrongTime > cts) {
+                    wrongTime = cts;
+                    wrongAnswer = x;
+                    wrongAnswerCnt = cer;
+                }
+            }
+            if (oldestTime === null || oldestTime > cts) {
+                oldestTime = cts;
+                oldestAnswer = x;
+            }
+        } else {
+            if (newKanji === null) {
+                newKanji = x;
+            }
+        }
+    }
+    var nextKanjiType = Math.floor(Math.random() * (100));
+    if (nextKanjiType < 20 && newKanji !== null) {
+        kanji = newKanji;
+    } else if (nextKanjiType < 30 && wrongAnswer !== null) {
+        localStorage.setItem("k31bcer" + wrongAnswer, wrongAnswerCnt - 1);
+        kanji = wrongAnswer;
+    } else if (oldestAnswer !== null) {
+        kanji = oldestAnswer;
+    } else {
+        kanji = 0;
+    }
+    updateKanji();
+}
+
+function showKanji() {
+    if (isShowing) {
+        isShowing = false;
+        document.getElementById('answer').innerText=' ';
+        document.getElementById('usage').innerText='* ';
+    } else {
+        typeKanji();
+    }
+}
+function storageAvailable() {
+    try {
+        var x = '__x';
+        localStorage.setItem(x, x);
+        localStorage.removeItem(x);
+        return true;
+    }
+    catch(e) {
+        return false;
+    }
+}
+
+document.getElementById('question').innerText=words[0][0];
+
+var myPen;
+function init() {
+    var canvas = document.getElementById('drawing');
+    var context = canvas.getContext('2d');
+    context.strokeStyle="#995522";
+    context.lineWidth=6;
+    canvas.addEventListener('mousedown', handleMouseEvent, false);
+    canvas.addEventListener('mouseup', handleMouseEvent, false);
+    canvas.addEventListener('mousemove', handleMouseEvent, false);
+
+    myPen = new Pen(context);
+    canvas.addEventListener("touchstart", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousedown", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    canvas.addEventListener("touchend", function (e) {
+        var mouseEvent = new MouseEvent("mouseup", {});
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchmove", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousemove", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    document.body.addEventListener("touchstart", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchend", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+    document.body.addEventListener("touchmove", function (e) {
+        if (e.target == canvas) {
+            e.preventDefault();
+        }
+    }, false);
+}
+
+function Pen(context) {
+    var isDrawing = false;
+    var self = this;
+
+    self.mousedown = function(e, x, y) {
+        context.beginPath();
+        context.moveTo(x, y);
+        isDrawing = true;
+    };
+
+    self.mouseup = function(e, x, y) {
+        if (isDrawing) {
+            self.mousemove(e);
+            isDrawing = false;
+        }
+    };
+    self.mousemove = function(e, x, y) {
+        if (isDrawing) {
+            context.lineTo(x, y);
+            context.stroke();
+        }
+    };
+}
+function handleMouseEvent(e) {
+    var x = 0, y = 0;
+    if (e.layerX || e.layerX === 0) {
+        x = e.layerX;
+        y = e.layerY;
+    } else if (e.offsetX || e.offsetX === 0) {
+        x = e.offsetX;
+        y = e.offsetY;
+    }
+    if (myPen[e.type]) {
+        myPen[e.type](e,x,y);
+    }
+    console.log(e.type, x, y);
+}
+
+
+</script>
+<div id="holder">
+    <canvas id="drawing" width="1180" height="280"></canvas>
+</div>
+<p class="ultra-large" id="answer"> </p>
+<p id="usage">* </p>
+<button id="vbut" onclick="toggleShow();">V</button>
+<button onclick="showKanji();">VISA</button>
+<button onclick="newKanji();">SLUMP</button>
+<button onclick="prevKanji();">&lt;</button>
+<button onclick="nextKanji();">&gt;</button>
+<button onclick="clearCanvas();">RENSA</button>
+<button onclick="wrongAnswer();">FEL</button>
+<button onclick="bestQuestion();">Q</button>
+<h2>Instruktioner</h2>
+<p>Repetition inför JP1300 text 1</p>
+<p>Rita det tecken som efterfrågas (med mus eller finger), när du är klar tryck på visa, så kan du
+jämföra streckordning och utseende med facit.</p>
+<ul>
+    <li>V: Slå av/på att visa facit direkt när man väljer nytt tecken, bra om man bara vill gå igenom lite snabbt</li>
+    <li>VISA: Visa facit, eller dölj om det redan visas</li>
+    <li>SLUMP: Välj ett nytt slumpvis tecken</li>
+    <li>&gt;: Välj nästa tecken i ordning</li>
+    <li>&lt;: Välj föregående tecken</li>
+    <li>RENSA: Töm ritytan ifall man vill börja om att rita</li>
+</ul>
+<table id="table">
+</table>
+<footer>
+    <p>I would like to thank the Kanji VG project (http://kanjivg.tagaini.net/). I am not associated with Kanji VG, just a user.
+        The kanji svg files (i.e. the kanji drawings with stroke order) are used by permission under the following licens:</p>
+    <h4>Licence</h4>
+    <p>KanjiVG is copyright © 2009-2015 Ulrich Apel and released under the Creative Commons Attribution-Share Alike 3.0 license.<br>
+        <a href="https://creativecommons.org/licenses/by-sa/3.0/">https://creativecommons.org/licenses/by-sa/3.0/</a></p>
+</footer>
+<script>
+    var table = document.getElementById('table');
+    for (var i = 0; i < wordCount; i++){
+        var tr = document.createElement('tr');
+
+        var td0 = document.createElement('td');
+        var td1 = document.createElement('td');
+        var td2 = document.createElement('td');
+
+        var text1 = document.createTextNode(words[i][0]);
+        var text2 = document.createTextNode(words[i][2]);
+        if ((words[i][0]).indexOf('(') > 0) {
+            var hex = words[i][1].toString().charCodeAt(0).toString(16);
+            var word = words[i][1];
+            if (word === '結婚する') {
+                hex = words[i][1].toString().charCodeAt(1).toString(16);
+            }
+            td0.innerHTML = '<img onclick="showThisKanji(' + i + ');" width = "80" src="svg/0' + hex + '.svg"/>';
+        }
+        td1.appendChild(text1);
+        td2.appendChild(text2);
+        tr.appendChild(td0);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+        table.appendChild(tr);
+    }
+</script>
+</body>
+</html>
