@@ -1,0 +1,40 @@
+body {
+    background: #eeefff; // url("gota.jpg") no-repeat;
+    background-size: 1270px, 275px;
+}
+h1, h2, p, td {
+    font-family: "Helvetica Neue", sans-serif;
+    font-weight: normal;
+}
+
+#drawing {
+    border: 2px solid #047;
+}
+
+#holder {
+    position: relative;
+}
+
+td {
+    font-size: large;
+    align: bottom;
+}
+
+.smaller {
+    font-size: medium;
+}
+
+.ultra-large {
+    font-size: 500%;
+    margin-top: -190px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 20px;
+    height: 300px;
+    color: cornflowerblue;
+}
+
+.svg {
+    margin-right: -25px;
+    -webkit-text-stroke-color: darkred;
+}

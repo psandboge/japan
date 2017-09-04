@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Glosor,  jp1300 text 1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="g1200bv.css">
+    <link rel="stylesheet" type="text/css" href="g1300kana.css">
 </head>
 <body onload="init();">
 <p id="question"></p>
@@ -77,7 +77,7 @@ function getRandomInt() {
 }
 function clearCanvas() {
     var ctx = document.getElementById('drawing').getContext('2d');
-    ctx.clearRect(0, 0, 1200,300);
+    ctx.clearRect(0, 0, 1200,200);
     ctx.beginPath();
 }
 function updateKanji() {
@@ -85,9 +85,9 @@ function updateKanji() {
     var info = words[kanji][0];
     if (storageAvailable()) {
         info += " " + kanji + "/" + words.length;
-        var ctr = localStorage.getItem("k31bctr" + kanji);
-        var cer = localStorage.getItem("k31bcer" + kanji);
-        var cts = localStorage.getItem("k31bcts" + kanji);
+        var ctr = localStorage.getItem("k31cctr" + kanji);
+        var cer = localStorage.getItem("k31ccer" + kanji);
+        var cts = localStorage.getItem("k31ccts" + kanji);
         if (cts) {
             info += " Tries: " + ctr;
             info += " Errors: " + cer;
@@ -130,36 +130,36 @@ function typeKanji() {
     var s = "";
     for (var i = 0; i < len; i++) {
         var hex = words[kanji][1].toString().charCodeAt(i).toString(16);
-        s += '<img class = "svg" width = "280" src="svg/0' + hex + '.svg"/>'
+        s += '<img class = "svg" width = "180" src="svg/0' + hex + '.svg"/>'
     }
     document.getElementById('answer').innerHTML = s;
     if (storageAvailable()) {
-        var ctr = Number(localStorage.getItem("k31bctr" + kanji));
-        var cer = Number(localStorage.getItem("k31bcer" + kanji));
-        var cts = localStorage.getItem("k31bcts" + kanji);
+        var ctr = Number(localStorage.getItem("k31cctr" + kanji));
+        var cer = Number(localStorage.getItem("k31ccer" + kanji));
+        var cts = localStorage.getItem("k31ccts" + kanji);
         if (!cts) {
-            localStorage.setItem("k31bctr" + kanji, 1);
-            localStorage.setItem("k31bcer" + kanji, 0);
-            localStorage.setItem("k31bcts" + kanji, Date.now());
+            localStorage.setItem("k31cctr" + kanji, 1);
+            localStorage.setItem("k31ccer" + kanji, 0);
+            localStorage.setItem("k31ccts" + kanji, Date.now());
         } else {
-            localStorage.setItem("k31bctr" + kanji, ctr + 1);
-            localStorage.setItem("k31bcer" + kanji, cer);
-            localStorage.setItem("k31bcts" + kanji, Date.now());
+            localStorage.setItem("k31cctr" + kanji, ctr + 1);
+            localStorage.setItem("k31ccer" + kanji, cer);
+            localStorage.setItem("k31ccts" + kanji, Date.now());
         }
     }
 }
 
 function wrongAnswer() {
     if (storageAvailable()) {
-        var cer = Number(localStorage.getItem("k31bcer" + kanji));
-        var cts = localStorage.getItem("k31bcts" + kanji);
+        var cer = Number(localStorage.getItem("k31ccer" + kanji));
+        var cts = localStorage.getItem("k31ccts" + kanji);
         if (!cts) {
-            localStorage.setItem("k31bctr" + kanji, 1);
-            localStorage.setItem("k31bcer" + kanji, 1);
-            localStorage.setItem("k31bcts" + kanji, Date.now());
+            localStorage.setItem("k31cctr" + kanji, 1);
+            localStorage.setItem("k31ccer" + kanji, 1);
+            localStorage.setItem("k31ccts" + kanji, Date.now());
         } else {
-            localStorage.setItem("k31bcer" + kanji, cer + 1);
-            localStorage.setItem("k31bcts" + kanji, Date.now());
+            localStorage.setItem("k31ccer" + kanji, cer + 1);
+            localStorage.setItem("k31ccts" + kanji, Date.now());
         }
     }
 }
@@ -172,9 +172,9 @@ function bestQuestion() {
     var oldestTime = null;
     var wrongTime = null;
     for (var x = 0; x < wordCount; x++) {
-//        var ctr = Number(localStorage.getItem("k31bctr" + x));
-        var cer = Number(localStorage.getItem("k31bcer" + x));
-        var cts = Number(localStorage.getItem("k31bcts" + x));
+//        var ctr = Number(localStorage.getItem("k31cctr" + x));
+        var cer = Number(localStorage.getItem("k31ccer" + x));
+        var cts = Number(localStorage.getItem("k31ccts" + x));
         if (cts) {
             if (cer >= 1) {
                 if (wrongTime === null || wrongTime > cts) {
@@ -197,7 +197,7 @@ function bestQuestion() {
     if (nextKanjiType < 20 && newKanji !== null) {
         kanji = newKanji;
     } else if (nextKanjiType < 30 && wrongAnswer !== null) {
-        localStorage.setItem("k31bcer" + wrongAnswer, wrongAnswerCnt - 1);
+        localStorage.setItem("k31ccer" + wrongAnswer, wrongAnswerCnt - 1);
         kanji = wrongAnswer;
     } else if (oldestAnswer !== null) {
         kanji = oldestAnswer;
@@ -321,7 +321,7 @@ function handleMouseEvent(e) {
 
 </script>
 <div id="holder">
-    <canvas id="drawing" width="1180" height="280"></canvas>
+    <canvas id="drawing" width="1180" height="180"></canvas>
 </div>
 <p class="ultra-large" id="answer"> </p>
 <p id="usage">* </p>
@@ -334,8 +334,8 @@ function handleMouseEvent(e) {
 <button onclick="wrongAnswer();">FEL</button>
 <button onclick="bestQuestion();">Q</button>
 <h2>Instruktioner</h2>
-<p>Repetition inför JP1300 text 1</p>
-<p>Rita det tecken som efterfrågas (med mus eller finger), när du är klar tryck på visa, så kan du
+<p>Ordlista JP1300 text 1</p>
+<p>Rita den text som efterfrågas (med mus eller finger), när du är klar tryck på visa, så kan du
 jämföra streckordning och utseende med facit.</p>
 <ul>
     <li>V: Slå av/på att visa facit direkt när man väljer nytt tecken, bra om man bara vill gå igenom lite snabbt</li>
@@ -345,6 +345,9 @@ jämföra streckordning och utseende med facit.</p>
     <li>&lt;: Välj föregående tecken</li>
     <li>RENSA: Töm ritytan ifall man vill börja om att rita</li>
 </ul>
+<p>Listan nedanför innehåller alla övningsobjekt.</p>
+<p>Klicka på ett kanji i listan för att välja ett specifikt tecken.</p>
+<p><b>OBS! Funkar bäst med en platta.</b></p>
 <table id="table">
 </table>
 <footer>
