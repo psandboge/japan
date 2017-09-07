@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grammatik</title>
+</head>
+<body>
+<script>
+    function say(text) {
+        var msg = new SpeechSynthesisUtterance();
+        msg.text = text;
+        msg.lang = 'ja-JP';
+        speechSynthesis.speak(msg);
+    }
+</script>
+<h1>Grammatik jp1300, Text 1</h1>
+</body>
+</html>
