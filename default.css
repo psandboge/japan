@@ -1,0 +1,71 @@
+body {
+    background-color: floralwhite;
+    font-family: sans-serif;
+    margin: 0;
+}
+header {
+    background-image: url("img/leaf_on_ground.jpg");
+    background-color: darkred;
+    background-size: 100%;
+    color: floralwhite;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+a {
+    background-color: aliceblue;
+    color: darkolivegreen;
+    border-radius: 5px;
+    line-height: 32px;
+    padding: 3px;
+    text-decoration: none;
+}
+
+a:visited {
+    color: darkslategray;
+}
+
+a:hover {
+    background-color: floralwhite;
+}
+
+main {
+    display: grid;
+    background-color: floralwhite;
+    grid-gap: 0;
+    font-family: sans-serif;
+    grid-template-columns: 25% 25% 25% 25%;
+    padding: 10px;
+}
+
+main p {
+    display: grid;
+    background-color: #ffe1f3;
+    grid-template-columns: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px;
+    text-align: center;
+    font-weight: bolder;
+    color: darkolivegreen;
+    line-height: 150%;
+}
+
+footer {
+    display: grid;
+    background-color: lightsteelblue;
+    grid-gap: 0;
+    font-family: sans-serif;
+    grid-template-columns: 95%;
+    margin: 0;
+    padding: 10px;
+}
+
+.t1 {
+    background-color: lightgreen;
+}
+.t2 {
+    background-color: lightsteelblue;
+}
+.t3 {
+    background-color: lightsalmon;
+}
