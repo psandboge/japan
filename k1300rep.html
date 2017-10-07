@@ -450,7 +450,9 @@ function updateKanji() {
         if (cts) {
             info += " Tries: " + ctr;
             info += " Errors: " + cer;
-            info += " Last try: " + cts;
+            var now = Date.now();
+            var lapsed = new Date(now - cts).toUTCString().split(" ")[4];
+            info += " Last try: " + lapsed;
         }
     }
 //    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
