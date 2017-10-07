@@ -452,7 +452,8 @@ function updateKanji() {
             info += " Errors: " + cer;
             var now = Date.now();
             var lapsed = new Date(now - cts).toUTCString().split(" ")[4];
-            info += " Last try: " + lapsed;
+            var lapsedDay = Math.floor((now - cts)/24/60/60/1000);
+            info += " Last try: " + lapsedDay + "d " + lapsed;
         }
     }
 //    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
