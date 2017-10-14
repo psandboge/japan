@@ -43,7 +43,7 @@ var words = [
     ['natt(バン)','晩', '+:ikväll:kvällsmat'],
     ['anledning,ursprung(ヨウ)','用', '+利用、りよう:anledning:frihet'],
     ['nödvändig()','必', '+:nödvändig:utan misstag'],
-    ['behov,huvudsaklig()','要る', '+:nödvändig,behöva'],
+    ['behov,huvudsaklig()','要', '+:nödvändig,behöva'],
     ['passa()','会', ':passera+:tillfälle+:passa'],
     ['föregående,()','昨', ':förra året+:igår'],
 
@@ -52,7 +52,7 @@ var words = [
     ['röst()','声', ':+:'],
     ['samla()','集', ':+:'],
     ['erbjudande,deltagare()','供', ':+:'],
-    ['gråta()','', ':+:'],
+    ['gråta()','泣', ':+:'],
     ['båda()','両', ':+:'],
     ['den,träffa()','当', ':+:'],
     ['lösa,knyta upp()','解', ':+:'],
@@ -105,7 +105,7 @@ function clearCanvas() {
     ctx.beginPath();
 }
 function updateKanji() {
-//    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
     var info = words[kanji][0];
     if (storageAvailable()) {
         info += " " + kanji + "/" + words.length;
@@ -118,7 +118,7 @@ function updateKanji() {
             info += " Last try: " + cts;
         }
     }
-//    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
+    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
     document.getElementById('question').innerText=info;
     clearCanvas();
     isShowing = show;

@@ -2,127 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Glosor,  jp1300 text 1</title>
+    <title>Kanji,  jp1300 text 1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="g1300kana.css">
+    <link rel="stylesheet" type="text/css" href="g1200bv.css">
 </head>
 <body onload="init();">
 <p id="question"></p>
 <script>
 var words = [
-    ['geografi()','ちり', '地理:'],
-    ['alla()','みなさん', '皆さん:'],
-    ['stor()','おおき', '大き:'],
-    ['ö()','しま', '島:'],
-    ['kontinent()','たいりく', '大陸:'],
-    ['stor storstad()','とし', '都市:'],
-    ['Hokkaido()','ほっかいどう', '北海道:'],
-    ['Honshu()','ほんしゅう', '本州:'],
-    ['Shikoku()','しこく', '四国:'],
-    ['Kyushu()','きゅうしゅう', '九州:'],
-    ['allt()','ぜんたい', '全体:'],
-    ['prefektur, huvudstad()','と', '都:'],
-    ['prefektur, ö()','どう', '道:'],
-    ['prefektur, storstad()','ふ', '府:'],
-    ['prefektur()','けん', '県:'],
-    ['huvudstad()','しゅと', '首都:'],
-    ['krig()','せんそう', '戦争:'],
-    ['fred()','へいわ', '平和:'],
-    ['informera()','つたえる', '伝える:'],
-    ['klimat()','きこう', '気候:'],
-    ['dag()','ひ', '日:'],
-    ['lufttemperatur()','きおん', '気温:'],
-    ['skillnad()','さ', '差:'],
-    ['körsbärsblom()','さくら', '桜:'],
-    ['slut!()','おわり', '終わり:'],
-    ['människor()','ひとびと', '人々:'],
-    ['njuta()','たのしむ', '楽しむ:'],
-    ['sevärdhet()','めいしょ', '名所:'],
-    ['t ex()','たとえば', '例えば:'],
-    ['extremt()','もっとも', '最も:'],
-    ['vacker()','うつくしい', '美しい:'],
-    ['borg()','おしろ', 'お城:'],
-    ['sedan()','まえ', '前:'],
-    ['vägg()','かべ', '壁:'],
-    ['återstå()','のこる', '残る:'],
-    ['byggnad()','たてもの', '建物:'],
-    ['form()','かたち', '形:'],
-    ['filminspelning()','さつえい', '撮影:'],
-    ['sightseeing()','かんこう', '観光:'],
-    ['syfte()','もくてき', '目的:'],
-    ['avslappning()','リラックス', 'リラックスする:'],
-    ['sceneri()','けしき', '景色:'],
-    ['särskilt()','とくに', '特に:'],
-    ['storstad()','市', 'し:'],
-    ['våning()','かい', '階:'],
-    ['rundtur()','けんがく', '見学:'],
+    ['Tidningsartikel()','新聞記事', ':'],
+    ['Tanabata()','七夕', ':'],
+    ['()','にぎやか', ':'],
+    ['()','台東', ':'],
+    ['()','', ':'],
+    ['platt,fred(ヘイ、たい)','平', '+平和、へいわ:fred・平ら、たいら:platt'],
+    ['fred,japansk(ワ)','和', '+平和、へいわ:fred・和食、わしょく:japansk mat'],
+    ['rapportera,sända(でん、つた)','伝', '伝統的、でんとうてき:traditionell・+伝える:rapportera・手伝う、てつだう:hjälpa'],
+    ['varm,varsam(オン、あたた)','温', '+気温、きおん:lufttemperatur・温かい、あたたかい:varm'],
+    ['skillnad,avvikelse(サ)','差', '+差、さ:skillnad'],
+    ['vacker(ビ、うつく)','美', '美術館、びじゅつかん:konstmuseum・+美しい、うつくしい:vacker'],
+    ['välja(セン、えら)','選', '選手、せんしゅ:atlet・選ぶ、えらぶ:välja'],
+    ['återstå,rest(ザン、おこ)','残', '残念、ざんねん:beklagligt・+残る、のこる:vara kvar,återstå'],
+    ['bygga(ケン、た)','建', '+建物、たてもの:byggnad・建築、けんちく:arkitektur・建てる、たてる:bygga'],
+    ['form,skepnad(ケイ、ギョウ、かたち)','形', ':dåtid(grammatik):docka+:form'],
+    ['mål(テキ)','的', '+目的、もくてき:syfte・日本的、にほんてき:japansk'],
+    ['speciell(トク)','特', '+特、とく:särskilt・+特別、とくべつ:speciell'],
+    ['stad,marknad(シ、いち)','市', '+市、し:storstad・市場、いちば:marknad・+大都市、だいとつ:stor storstad'],
+    ['förklara,teori(セツ)','説', '+小説、しょうせつ:roman・小説家、しょうせつか:romanförfattare・説明、せつめい:förklara'],
+    ['besluta(ケツ、き)','決', '解決、かいけつ:lösa・+決まる、きまる:beslutas'],
+    ['separat,annan,annorlunda(ベツ、わか)','別', '+特別、とくべつ:speciell・別れる、わかれる:göra slut'],
+    ['anlända,nå(タツ、たち)','達', '子供達、こどもたち:ungar・上達、じょうたつ:förbättra・友達、ともだち:vän'],
+    ['memorera(カク、おぼ)','覚', '感覚、かんかく:sinne・+覚える、おぼえる:memorera'],
 
-    ['gammal historia()','むかしばなし', '昔話:'],
-    ['huvudämne()','せんこう', '専攻:'],
-    ['alla sorters()','いろいろと', '色々と:'],
-    ['specialisering()','せんもん', '専門:'],
-    ['region()','ちほう', '地方:'],
-    ['landsorten()','いなか', '田舎:'],
-    ['Kanto()','かんとう', '関東:'],
-    ['Kansai()','かんさい', '関西:'],
-    ['bli upptagen i()','はいる', '入る:'],
-    ['välkänd, lokal specialitet()','めいぶつ', '名物:'],
-    ['traditionell()','でんとうてき', '伝統的:'],
-    ['evenemang()','ぎょうじ', '行事:'],
-    ['år()','とし', '年:'],
-    ['särskild()','とくべつ', '特別:'],
-    ['utföra()','おこなう', '行う:'],
-    ['nyårs-()','おしょうがつ', 'お正月:'],
-    ['flera(personer)','たち', '達:'],
-    ['bild,målning()','え', '絵:'],
-    ['mycket()','たいへん', '大変:'],
-    ['sant,verkligen()','ほんとうの', '本当の:'],
+    ['sanning,verklighet,frukt()','え', '+:ärligt talat:bära(frukt)'],
+    ['tillsammans()','え', ':konsultera+:samtalspart'],
+    ['svårighet()','え', ':umbärande+:svår'],
+    ['natur,kön()','え', '+:kvinna+,man'],
+    ['jämföra()','え', ':jämföra+:jämföra'],
+    ['ersätta,era()','え', 'period+:istället för:'],
+    ['känsla,förnimmelse()','え', '+:känsla:känna'],
+    ['yta,uttrycka()','え', '+:bord:representera'],
+    ['upptagen,rastlös()','え', ':mycket upptagen+:upptagen'],
+    ['kort,defekt()','え', ':tanka+:kort'],
+    ['natt()','え', '+:ikväll:kvällsmat'],
+    ['anledning,ursprung()','え', '+:anledning:frihet'],
+    ['nödvändig()','え', '+:nödvändig:utan misstag'],
+    ['behov,huvudsaklig()','え', '+:nödvändig,behöva'],
+    ['passa()','え', ':passera+:tillfälle+:passa'],
+    ['föregående,()','え', ':förra året+:igår'],
 
-    ['plats man kommer från()','しゅっしん', '出身:'],
-    ['natur(lig)','しぜん', '自然:'],
-    ['strikt()','きびしい', '厳しい:'],
-    ['känsla()','きもち', '気持ち:'],
-    ['början()','はじめ', '初め:'],
-    ['festival()','まつり', '祭り:'],
-    ['fantastiskt()','すごい', ':'],
-    ['jag()','ぼく', '僕:'],
 
-    ['keigo()','', ':'],
-    ['faktiskt()','', ':'],
-    ['komplicerad()','', ':'],
-    ['regler()','', ':'],
-    ['lektion()','', ':'],
-    ['artig()','', ':'],
-    ['språk()','', ':'],
-    ['samtalspart()','', ':'],
-    ['förändra()','', ':'],
-    ['del()','', ':'],
-    ['man()','', ':'],
-    ['kvinna()','', ':'],
-    ['jämföra()','', ':'],
-    ['känsla,intryck()','', ':'],
-    ['många()','', ':'],
-    ['situation()','', ':'],
-    ['observation()','', ':'],
-    ['tabell,graf()','', ':'],
-    ['män och kvinnor()','', ':'],
-    ['bjuda på(middag mm)','', ':'],
-    ['tecken,bokstav()','', ':'],
-    ['pojk-/flickvän()','', ':'],
-    ['exemple()','', ':'],
-    ['uttryck()','', ':'],
-    ['den sista()','', ':'],
-    ['kontakt, kommunikation()','', ':'],
-    ['uppenbarligen()','', ':'],
-    ['bjuda in,fråga()','', ':'],
-    ['()','', ':'],
-    ['()','', ':'],
-    ['()','', ':'],
-    ['()','', ':'],
-    ['()','', ':'],
-    ['()','', ':'],
+    ['ta(と)','取', '取る、とる:ta・受け取る、うけとる:ta emot・取り出す、とりだす:ta ut・取り消す、とりけす:upphäva'],
+    ['ta','取る', '取る、とる:ta'],
 
-//    ['()','', ':'],
 ];
 var wordCount = words.length;
 var kanji = 0;
@@ -141,7 +73,7 @@ function getRandomInt() {
 }
 function clearCanvas() {
     var ctx = document.getElementById('drawing').getContext('2d');
-    ctx.clearRect(0, 0, 1200,200);
+    ctx.clearRect(0, 0, 1200,300);
     ctx.beginPath();
 }
 function updateKanji() {
@@ -149,9 +81,9 @@ function updateKanji() {
     var info = words[kanji][0];
     if (storageAvailable()) {
         info += " " + kanji + "/" + words.length;
-        var ctr = localStorage.getItem("k31cctr" + kanji);
-        var cer = localStorage.getItem("k31ccer" + kanji);
-        var cts = localStorage.getItem("k31ccts" + kanji);
+        var ctr = localStorage.getItem("k31bctr" + kanji);
+        var cer = localStorage.getItem("k31bcer" + kanji);
+        var cts = localStorage.getItem("k31bcts" + kanji);
         if (cts) {
             info += " Tries: " + ctr;
             info += " Errors: " + cer;
@@ -194,36 +126,36 @@ function typeKanji() {
     var s = "";
     for (var i = 0; i < len; i++) {
         var hex = words[kanji][1].toString().charCodeAt(i).toString(16);
-        s += '<img class = "svg" width = "180" src="svg/0' + hex + '.svg"/>'
+        s += '<img class = "svg" width = "280" src="svg/0' + hex + '.svg"/>'
     }
     document.getElementById('answer').innerHTML = s;
     if (storageAvailable()) {
-        var ctr = Number(localStorage.getItem("k31cctr" + kanji));
-        var cer = Number(localStorage.getItem("k31ccer" + kanji));
-        var cts = localStorage.getItem("k31ccts" + kanji);
+        var ctr = Number(localStorage.getItem("k31bctr" + kanji));
+        var cer = Number(localStorage.getItem("k31bcer" + kanji));
+        var cts = localStorage.getItem("k31bcts" + kanji);
         if (!cts) {
-            localStorage.setItem("k31cctr" + kanji, 1);
-            localStorage.setItem("k31ccer" + kanji, 0);
-            localStorage.setItem("k31ccts" + kanji, Date.now());
+            localStorage.setItem("k31bctr" + kanji, 1);
+            localStorage.setItem("k31bcer" + kanji, 0);
+            localStorage.setItem("k31bcts" + kanji, Date.now());
         } else {
-            localStorage.setItem("k31cctr" + kanji, ctr + 1);
-            localStorage.setItem("k31ccer" + kanji, cer);
-            localStorage.setItem("k31ccts" + kanji, Date.now());
+            localStorage.setItem("k31bctr" + kanji, ctr + 1);
+            localStorage.setItem("k31bcer" + kanji, cer);
+            localStorage.setItem("k31bcts" + kanji, Date.now());
         }
     }
 }
 
 function wrongAnswer() {
     if (storageAvailable()) {
-        var cer = Number(localStorage.getItem("k31ccer" + kanji));
-        var cts = localStorage.getItem("k31ccts" + kanji);
+        var cer = Number(localStorage.getItem("k31bcer" + kanji));
+        var cts = localStorage.getItem("k31bcts" + kanji);
         if (!cts) {
-            localStorage.setItem("k31cctr" + kanji, 1);
-            localStorage.setItem("k31ccer" + kanji, 1);
-            localStorage.setItem("k31ccts" + kanji, Date.now());
+            localStorage.setItem("k31bctr" + kanji, 1);
+            localStorage.setItem("k31bcer" + kanji, 1);
+            localStorage.setItem("k31bcts" + kanji, Date.now());
         } else {
-            localStorage.setItem("k31ccer" + kanji, cer + 1);
-            localStorage.setItem("k31ccts" + kanji, Date.now());
+            localStorage.setItem("k31bcer" + kanji, cer + 1);
+            localStorage.setItem("k31bcts" + kanji, Date.now());
         }
     }
 }
@@ -236,9 +168,9 @@ function bestQuestion() {
     var oldestTime = null;
     var wrongTime = null;
     for (var x = 0; x < wordCount; x++) {
-//        var ctr = Number(localStorage.getItem("k31cctr" + x));
-        var cer = Number(localStorage.getItem("k31ccer" + x));
-        var cts = Number(localStorage.getItem("k31ccts" + x));
+//        var ctr = Number(localStorage.getItem("k31bctr" + x));
+        var cer = Number(localStorage.getItem("k31bcer" + x));
+        var cts = Number(localStorage.getItem("k31bcts" + x));
         if (cts) {
             if (cer >= 1) {
                 if (wrongTime === null || wrongTime > cts) {
@@ -261,7 +193,7 @@ function bestQuestion() {
     if (nextKanjiType < 20 && newKanji !== null) {
         kanji = newKanji;
     } else if (nextKanjiType < 30 && wrongAnswer !== null) {
-        localStorage.setItem("k31ccer" + wrongAnswer, wrongAnswerCnt - 1);
+        localStorage.setItem("k31bcer" + wrongAnswer, wrongAnswerCnt - 1);
         kanji = wrongAnswer;
     } else if (oldestAnswer !== null) {
         kanji = oldestAnswer;
@@ -385,7 +317,7 @@ function handleMouseEvent(e) {
 
 </script>
 <div id="holder">
-    <canvas id="drawing" width="1180" height="180"></canvas>
+    <canvas id="drawing" width="1180" height="280"></canvas>
 </div>
 <p class="ultra-large" id="answer"> </p>
 <p id="usage">* </p>
@@ -398,8 +330,8 @@ function handleMouseEvent(e) {
 <button onclick="wrongAnswer();">FEL</button>
 <button onclick="bestQuestion();">Q</button>
 <h2>Instruktioner</h2>
-<p>Ordlista JP1300 text 1</p>
-<p>Rita den text som efterfrågas (med mus eller finger), när du är klar tryck på visa, så kan du
+<p>Repetition inför JP1300 text 1</p>
+<p>Rita det tecken som efterfrågas (med mus eller finger), när du är klar tryck på visa, så kan du
 jämföra streckordning och utseende med facit.</p>
 <ul>
     <li>V: Slå av/på att visa facit direkt när man väljer nytt tecken, bra om man bara vill gå igenom lite snabbt</li>
@@ -409,9 +341,6 @@ jämföra streckordning och utseende med facit.</p>
     <li>&lt;: Välj föregående tecken</li>
     <li>RENSA: Töm ritytan ifall man vill börja om att rita</li>
 </ul>
-<p>Listan nedanför innehåller alla övningsobjekt.</p>
-<p>Klicka på ett kanji i listan för att välja ett specifikt tecken.</p>
-<p><b>OBS! Funkar bäst med en platta.</b></p>
 <table id="table">
 </table>
 <footer>

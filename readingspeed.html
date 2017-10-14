@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Läshastighet</title>
+</head>
+<script>
+    var allWords = [
+        [
+            ['','', '', ''],
+        ]
+    ]
+</script>
+<body>
+<div id="tiles">
+</div>
+<footer>
+    <p>Para ihop samma text (läsning). Texterna kan vara som hiragana, katakana eller kanji.</p>
+</footer>
+<script>
+    var table = document.getElementById('tiles');
+    for (var i = 0; i < wordCount; i++) {
+        var tr = document.createElement('tr');
+
+        var td0 = document.createElement('td');
+        var td1 = document.createElement('td');
+        var td2 = document.createElement('td');
+
+        var text1 = document.createTextNode(words[i][0]);
+        var text2 = document.createTextNode(words[i][2]);
+        if ((words[i][0]).indexOf('(') > 0) {
+            var hex = words[i][1].toString().charCodeAt(0).toString(16);
+            var word = words[i][1];
+            if (word === '結婚する') {
+                hex = words[i][1].toString().charCodeAt(1).toString(16);
+            }
+            td0.innerHTML = '<img onclick="showThisKanji(' + i + ');" width = "80" src="svg/0' + hex + '.svg"/>';
+        }
+        td1.appendChild(text1);
+        td2.appendChild(text2);
+        tr.appendChild(td0);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+
+        table.appendChild(tr);
+    }
+</script>
+
+</body>
+</html>
