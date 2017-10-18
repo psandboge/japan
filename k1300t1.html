@@ -105,7 +105,7 @@ function clearCanvas() {
     ctx.beginPath();
 }
 function updateKanji() {
-    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+    //var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
     var info = words[kanji][0];
     if (storageAvailable()) {
         info += " " + kanji + "/" + words.length;
@@ -118,7 +118,7 @@ function updateKanji() {
             info += " Last try: " + cts;
         }
     }
-    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
+    //info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
     document.getElementById('question').innerText=info;
     clearCanvas();
     isShowing = show;
