@@ -31,10 +31,10 @@ a:hover {
 main {
     display: grid;
     background-color: floralwhite;
-    grid-gap: 0;
+    grid-gap: 10px;
     font-family: sans-serif;
-    grid-template-columns: 25% 25% 25% 25%;
-    padding: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
 main p {
@@ -55,7 +55,7 @@ footer {
     background-color: lightsteelblue;
     grid-gap: 0;
     font-family: sans-serif;
-    grid-template-columns: 95%;
+    grid-template-columns: 1fr;
     margin: 0;
     padding: 10px;
 }
@@ -68,4 +68,13 @@ footer {
 }
 .t3 {
     background-color: lightsalmon;
+}
+
+.upp {
+    background-color: lightsteelblue;
+}
+
+.fourcol {
+    grid-column: 1/5;
+
 }
