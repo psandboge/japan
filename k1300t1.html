@@ -18,7 +18,7 @@ var words = [
     ['skillnad,avvikelse(サ)','差', '+差、さ:skillnad'],
     ['vacker(ビ、うつく)','美', '美術館、びじゅつかん:konstmuseum・+美しい、うつくしい:vacker'],
     ['välja(セン、えら)','選', '選手、せんしゅ:atlet・選ぶ、えらぶ:välja'],
-    ['återstå,rest(ザン、おこ)','残', '残念、ざんねん:beklagligt・+残る、のこる:vara kvar,återstå'],
+    ['återstå,rest(ザン、のこ)','残', '残念、ざんねん:beklagligt・+残る、のこる:vara kvar,återstå'],
     ['bygga(ケン、た)','建', '+建物、たてもの:byggnad・建築、けんちく:arkitektur・建てる、たてる:bygga'],
     ['form,skepnad(ケイ、ギョウ、かたち)','形', ':dåtid(grammatik):docka+:form'],
     ['mål(テキ)','的', '+目的、もくてき:syfte・日本的、にほんてき:japansk'],
@@ -44,25 +44,25 @@ var words = [
     ['anledning,ursprung(ヨウ)','用', '+利用、りよう:anledning:frihet'],
     ['nödvändig()','必', '+:nödvändig:utan misstag'],
     ['behov,huvudsaklig()','要', '+:nödvändig,behöva'],
-    ['passa()','会', ':passera+:tillfälle+:passa'],
-    ['föregående,()','昨', ':förra året+:igår'],
+    ['passa()','合', ':passera+:tillfälle+:passa'],
+    ['föregående,(さく、きのう)','昨', '昨年、さくねん:förra året・昨日、きのう+:igår'],
 
-    ['avgång,start()','発', ':+:'],
-    ['nacke()','首', ':+:'],
-    ['röst()','声', ':+:'],
-    ['samla()','集', ':+:'],
+    ['avgång,start(はつ)','発', ':+:'],
+    ['nacke(くび)','首', ':+:'],
+    ['röst(こえ)','声', ':+:'],
+    ['samla(あつ)','集', ':+:'],
     ['erbjudande,deltagare()','供', ':+:'],
-    ['gråta()','泣', ':+:'],
-    ['båda()','両', ':+:'],
-    ['den,träffa()','当', ':+:'],
+    ['gråta(な)','泣', ':+:'],
+    ['båda(りょう)','両', ':+:'],
+    ['den,träffa(あ)','当', ':+:'],
     ['lösa,knyta upp()','解', ':+:'],
     ['tanke,önskan()','念', ':+:'],
     ['skratt()','笑', ':+:'],
-    ['lag,regel()','法', ':+:'],
-    ['rak,reparera()','直', ':+:'],
-    ['svår,bitter()','苦', ':+:'],
-    ['hjälpa,rädda()','助', ':+:'],
-    ['bjuda,ringa()','呼', ':+:'],
+    ['lag,regel(ほう)','法', ':+:'],
+    ['rak,reparera(なお)','直', ':+:'],
+    ['svår,bitter(くる)','苦', ':+:'],
+    ['hjälpa,rädda(たす)','助', ':+:'],
+    ['bjuda,ringa(よ)','呼', ':+:'],
 
     ['finnas,visa sig()','現', ':+:'],
     ['sätta ihop,förenas()','組', ':+:'],
@@ -75,8 +75,8 @@ var words = [
     ['vända sig mot()','向', ':+:'],
     ['uppfostra,föda upp()','育', ':+:'],
     ['förmåga,noh-pjäs()','能', ':+:'],
-    ['han()','彼', ':+:'],
-    ['ge,delta()','与', ':+:'],
+    ['han(かれ、かの)','彼', ':+:'],
+    ['ge,delta(あた)','与', ':+:'],
     ['koppling,ansvarig person()','係', ':+:'],
     ['snabb,fart()','速', ':+:'],
 
@@ -115,7 +115,10 @@ function updateKanji() {
         if (cts) {
             info += " Tries: " + ctr;
             info += " Errors: " + cer;
-            info += " Last try: " + cts;
+            var now = Date.now();
+            var lapsed = new Date(now - cts).toUTCString().split(" ")[4];
+            var lapsedDay = Math.floor((now - cts)/24/60/60/1000);
+            info += " Last try: " + lapsedDay + "d " + lapsed;
         }
     }
     //info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
