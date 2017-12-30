@@ -84,6 +84,16 @@ function toggleShow() {
         document.getElementById('vbut').style['background-color'] = "gray";
     }
 }
+var eProb = 30;
+function toggleRep() {
+    if(eProb === 30) {
+        eProb = 90;
+        document.getElementById('sbut').style['background-color'] = "lightblue";
+    } else {
+        eProb = 30
+        document.getElementById('sbut').style['background-color'] = "gray";
+    }
+}
 function getRandomInt() {
     return Math.floor(Math.random() * (wordCount));
 }
@@ -93,7 +103,7 @@ function clearCanvas() {
     ctx.beginPath();
 }
 function updateKanji() {
-    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
+//    var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
     var info = words[kanji][0];
     if (storageAvailable()) {
         info += " " + kanji + "/" + words.length;
@@ -109,7 +119,7 @@ function updateKanji() {
             info += " Last try: " + lapsedDay + "d " + lapsed;
         }
     }
-    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
+//    info += ' - '+'cp kanji/0'+hex+'.svg ../../project/psandboge/japan/svg';
     document.getElementById('question').innerText=info;
     clearCanvas();
     isShowing = show;
@@ -209,9 +219,9 @@ function bestQuestion() {
         }
     }
     var nextKanjiType = Math.floor(Math.random() * (100));
-    if (nextKanjiType < 20 && newKanji !== null) {
+    if (nextKanjiType < 25 && newKanji !== null) {
         kanji = newKanji;
-    } else if (nextKanjiType < 30 && wrongAnswer !== null) {
+    } else if (nextKanjiType < eProb && wrongAnswer !== null) {
         localStorage.setItem("k32bcer" + wrongAnswer, wrongAnswerCnt - 1);
         kanji = wrongAnswer;
     } else if (oldestAnswer !== null) {
@@ -341,6 +351,7 @@ function handleMouseEvent(e) {
 <p class="ultra-large" id="answer"> </p>
 <p id="usage">* </p>
 <button id="vbut" onclick="toggleShow();">V</button>
+<button id="sbut" onclick="toggleRep();">SVÅRA</button>
 <button onclick="showKanji();">VISA</button>
 <button onclick="newKanji();">SLUMP</button>
 <button onclick="prevKanji();">&lt;</button>
