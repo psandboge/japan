@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kanji för jp1200 skriftsystem 1</title>
+    <title>Katakana</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
@@ -65,7 +65,7 @@ function getRandomInt() {
 }
 function clearCanvas() {
     var ctx = document.getElementById('drawing').getContext('2d');
-    ctx.clearRect(0, 0, 400,400);
+    ctx.clearRect(0, 0, 300,300);
     ctx.beginPath();
 }
 function updateKanji() {
@@ -94,7 +94,7 @@ function showKanji() {
     } else {
         isShowing = true;
         var hex = words[kanji][1].toString().charCodeAt(0).toString(16);
-        document.getElementById('answer').innerHTML = '<img width = "400" src="svg/0' + hex + '.svg"/>';
+        document.getElementById('answer').innerHTML = '<img width = "300" src="svg/0' + hex + '.svg"/>';
     }
 }
 
@@ -178,7 +178,7 @@ function handleMouseEvent(e) {
 
 </script>
 <div id="holder">
-    <canvas id="drawing" width="400" height="400"></canvas>
+    <canvas id="drawing" width="300" height="300"></canvas>
 </div>
 <p class="ultra-large" id="answer"> </p>
 <button onclick="showKanji();">VISA</button>
