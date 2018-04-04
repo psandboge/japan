@@ -162,8 +162,6 @@ function Pen(context) {
     };
 }
 function handleMouseEvent(e) {
-    e.preventDefault();
-    e.stopPropagation();
     var x = 0, y = 0;
     if (e.layerX || e.layerX === 0) {
         x = e.layerX;
