@@ -668,6 +668,13 @@ function handleMouseEvent(e) {
     console.log(e.type, x, y);
 }
 
+function printKanjis() {
+    var x = '';
+    for (var i = 0; i < wordCount; i++) {
+        x += ("'" + words[i][1] + "',")
+    }
+    console.log(x)
+}
 
 </script>
 <div id="holder">
