@@ -6,10 +6,27 @@
 </head>
 <body>
 <script>
+    voices = [];
+    jpVoice = null;
+    function getVoices() {
+        if (voices.length === 0) {
+            voices = speechSynthesis.getVoices();
+            for (i=0 ; i<voices.length; i++) {
+                if(voices[i].lang === 'ja-JP') {
+                    jpVoice = voices[i];
+                }
+            }
+        }
+    }
+    getVoices();
+    console.log("Voices:" + voices.length);
+    if (jpVoice != null) console.log(jpVoice.name);
     function say(text) {
+        getVoices();
         var msg = new SpeechSynthesisUtterance();
         msg.text = text;
         msg.lang = 'ja-JP';
+        msg.voice = jpVoice;
         speechSynthesis.speak(msg);
     }
 </script>
@@ -197,12 +214,24 @@
 <hr>
 <a id="gcon13_36"></a><h2>~として - I rollen som</h2>
 <p>N toshite ... , Som N så ... . N kan vara yrke, roll, kapabilitet eller liknande.</p>
+<p>
+    <span onclick="say('青い車と安いボルボとして、綺麗だ。')">&#x1f508;</span>青い車と安いボルボとして、綺麗だ。- Som en blå, billig Volvo, är den vacker.<br>
+</p>
 <hr>
 <a id="gcon13_37"></a><h2>~ことになっている - Som regel</h2>
 <p>V (kortform, ickedåtid) kotoninatteiru, som regel gälller att V.</p>
 <hr>
-<a id="gcon13_38"></a><h2>~をしている/~をしてN - Har</h2>
-<p>Se textboken</p>
+<a id="gcon13_38a"></a><h2>~をしている - Har</h2>
+<p>Beskriver en egenskap för ett objekt.</p>
+<p>
+    <span onclick="say('像は長い鼻をしています。')">&#x1f508;</span>像は長い鼻をしています。- Elefanter har en lång snabel(bokst. näsa).<br>
+</p>
+<hr>
+<a id="gcon13_38b"></a><h2>~をしてN - Har</h2>
+<p>Beskriver en egenskap för ett efterföljande substantiv.</p>
+<p>
+    <span onclick="say('それは車の形したレゴのキット。')">&#x1f508;</span>それは車の形したレゴのキット。- Det är en bilformad legobyggsats.<br>
+</p>
 <hr>
 <a id="gcon13_39a"></a><h2>~てくる - Mot mig</h2>
 <p>V + kuru, V närmar sig (i tid eller rum). V är på te-form. Att närma sig tidsmässigt innebär att någon aktivitet som har påbörjats tidigare fortfarande pågår.</p>
@@ -229,7 +258,10 @@
 <p>Adverbial.</p>
 <hr>
 <a id="gcon13_41"></a><h2>毎日のように~ - Nästan varje dag</h2>
-<p>Dag kan byas mot andra tidsord.</p>
+<p>Dag kan bytas mot andra tidsord.</p>
+<p>
+    <span onclick="say('私は、毎回ののように木から落ちます。')">&#x1f508;</span>私は、毎回ののように木から落ちます。- Jag trillar ner från trädet nästan varje gång.<br>
+</p>
 <hr>
 <a id="gcon13_42a"></a><h2>~と考えられている - Man tror att</h2>
 <p>Formellt. Baserat på talarens logiska slutsats.</p>
@@ -256,7 +288,10 @@
 <p>Konjunktion</p>
 <hr>
 <a id="gcon13_4f"></a><h2>~ても - Spelar ingen roll</h2>
-<p>Q X temo, X spelar ingen roll Q. Q är ett frågord, vem, vad osv.</p>
+<p>Q X på te-form mo. X spelar ingen roll Q. Q är ett frågord, vem, vad osv.</p>
+<p>
+    <span onclick="say('この問題はいくら教えてもわからない。')">&#x1f508;</span>この問題はいくら教えてもわからない。- Jag förstår inte frågan hur många gånger du än förklarar.<br>
+</p>
 <hr>
 <a id="gcon13_4g"></a><h2>~うちに - Innan, under tiden</h2>
 <p>M uchini ... , Under tiden M så ... / Innan M så ... . M är på kortform. Påminner om mae ni, men kan användas ihop med nekande verb. Gradskillnad, se textboken.</p>
